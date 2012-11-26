@@ -27,7 +27,7 @@ Attributes
 * `node['composer']['install_globally']` - Installation method, ':source' or ':package' - default true
 * `node['composer']['prefix']` - Location prefix of where the installation files will go if installing globally
 * `node['composer']['url']` - Location of the source
-* `node['mplayer']['install_dir']` - Installation target directory (absolute or relative path) if installing locally
+* `node['composer']['install_dir']` - Installation target directory (absolute or relative path) if installing locally
 
 Usage
 =====
