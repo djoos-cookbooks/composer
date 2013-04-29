@@ -20,7 +20,7 @@ unless node[:composer][:install_globally]
     end
 end
 
-bash "dowload_composer" do
+bash "download_composer" do
 	cwd "#{Chef::Config[:file_cache_path]}"
 	code <<-EOH
 		#{command}
