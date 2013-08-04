@@ -17,7 +17,7 @@ command = "curl -s https://getcomposer.org/installer | php"
 unless node[:composer][:install_globally]
 	unless node[:composer][:install_dir].nil? || node[:composer][:install_dir].empty?
 		command = command + " -- --install-dir=#{node[:composer][:install_dir]}"
-    end
+	end
 end
 
 bash "download_composer" do
@@ -25,6 +25,7 @@ bash "download_composer" do
 	code <<-EOH
 		#{command}
 	EOH
+	not_if "which composer"
 end
 
 if node[:composer][:install_globally]
@@ -33,5 +34,6 @@ if node[:composer][:install_globally]
 		code <<-EOH
 			sudo mv composer.phar #{node[:composer][:prefix]}/bin/composer
 		EOH
+		not_if "which composer"
 	end
 end
