@@ -13,3 +13,5 @@ end
 depends "php"
 
 recipe "composer", "Installs composer."
+recipe "composer::install", "Installs composer."
+recipe "composer::self_update", "Self-updates composer."
