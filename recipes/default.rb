@@ -5,8 +5,6 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-include_recipe "php"
-
 #install/upgrade curl
 package "curl" do
 	action :upgrade
