@@ -6,11 +6,12 @@ description      "Installs/Configures Composer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "0.0.5"
 
-%w{ debian ubuntu redhat centos fedora scientific amazon }.each do |os|
+%w{ debian ubuntu redhat centos fedora scientific amazon windows }.each do |os|
 supports os
 end
 
 depends "php"
+depends "windows"
 
 recipe "composer", "Installs composer."
 recipe "composer::install", "Installs composer."
