@@ -20,6 +20,7 @@ Requirements
 * RHEL
 * CentOS
 * Fedora
+* Windows
 
 Attributes
 ==========
