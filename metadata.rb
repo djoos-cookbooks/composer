@@ -10,7 +10,7 @@ version          "0.0.5"
 supports os
 end
 
-depends "php"
+recommends "php"
 
 recipe "composer", "Installs composer."
 recipe "composer::install", "Installs composer."

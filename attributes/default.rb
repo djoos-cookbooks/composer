@@ -9,3 +9,4 @@ default[:composer][:install_globally] = true
 default[:composer][:prefix] = "/usr/local"
 default[:composer][:url] = "https://getcomposer.org/installer"
 default[:composer][:install_dir] = nil
+default[:composer][:php_recipe] = "php::default"

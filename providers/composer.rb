@@ -9,7 +9,7 @@ def whyrun_supported?
     true
 end
 
-include_recipe "php"
+include_recipe node[:composer][:php_recipe]
 
 action :install do
     #install/upgrade curl

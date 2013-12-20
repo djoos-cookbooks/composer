@@ -11,6 +11,8 @@ Requirements
 
 ## Cookbooks:
 
+This cookbook recommends the following cookbooks:
+
 * php
 
 ## Platforms:
