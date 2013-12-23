@@ -5,7 +5,10 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-composer_composer "#{node[:composer][:install_dir]}" do
-    install_globally node[:composer][:install_globally]
-    action :self_update
+include_recipe "composer::install"
+
+execute "composer-self_update" do
+    cwd node['composer']['install_dir']
+    command "composer self-update"
+    action :run
 end

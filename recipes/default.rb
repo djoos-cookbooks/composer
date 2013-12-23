@@ -5,4 +5,4 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-include_recipe "composer::install"
+include_recipe "composer::self_update"

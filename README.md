@@ -14,6 +14,11 @@ Requirements
 This cookbook recommends the following cookbooks:
 
 * php
+* windows
+
+### Depending on your environment, these recommended cookbooks are actual dependencies (depends):
+* Using the community PHP cookbook to get PHP installed? You'll need the php cookbook to be available.
+* Running on Windows? You'll need the windows cookbook to be available.
 
 ## Platforms:
 
@@ -22,6 +27,7 @@ This cookbook recommends the following cookbooks:
 * RHEL
 * CentOS
 * Fedora
+* Windows
 
 Attributes
 ==========
