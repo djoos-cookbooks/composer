@@ -16,7 +16,7 @@ action :install do
     quiet = new_resource.quiet ? "--quiet" : ""
 
     execute "install-composer-for-project" do
-        cwd "#{new_resource.project_dir}"
+        cwd new_resource.project_dir
         command "#{node['composer']['bin']} install --no-interaction --no-ansi #{quiet} #{dev}"
         action :run
         only_if "which composer"
@@ -29,7 +29,7 @@ action :update do
     quiet = new_resource.quiet ? "--quiet" : ""
 
     execute "update-composer-for-project" do
-        cwd "#{new_resource.project_dir}"
+        cwd new_resource.project_dir
         command "#{node['composer']['bin']} update --no-interaction --no-ansi #{quiet} #{dev}"
         action :run
         only_if "which composer"
@@ -41,7 +41,7 @@ action :dump_autoload do
     quiet = new_resource.quiet ? "--quiet" : ""
 
     execute "dump-autoload-composer-for-project" do
-        cwd "#{new_resource.project_dir}"
+        cwd new_resource.project_dir
         command "#{node['composer']['bin']} dump-autoload --no-interaction --no-ansi #{quiet} #{dev}"
         action :run
         only_if "which composer"
