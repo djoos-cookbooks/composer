@@ -5,7 +5,7 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-use_inline_resources
+use_inline_resources if defined?(use_inline_resources)
 
 def whyrun_supported?
     true
