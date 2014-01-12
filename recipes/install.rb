@@ -30,7 +30,7 @@ else
 
     remote_file cache_file do
         source node['composer']['url']
-        mode "0774"
+        mode "0755"
         action :create
         not_if do
             ::File.exists?(cache_file)
