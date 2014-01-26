@@ -37,13 +37,54 @@ Attributes
 * `node['composer']['url']` - Location of the source
 * `node['composer']['install_dir']` - Installation target directory (absolute or relative path) if installing locally
 
+Resources / Providers
+=====================
+
+This cookbook includes an LWRP for managing a Composer project
+
+### `composer_project`
+
+#### Actions
+- :install: Reads the composer.json file from the current directory, resolves the dependencies, and installs them into vendor - this is the default action
+- :update: Gets the latest versions of the dependencies and updates the composer.lock file
+- :dump_autoload: Updates the autoloader without having to go through an install or update (eg. because of new classes in a classmap package)
+
+#### Attribute parameters
+- project_dir: The directory where your project's composer.json can be found
+- dev: Install packages listed in require-dev, default false
+- quiet: Do not output any message, default true
+
+#### Examples
+```
+#install project vendors
+composer_project "/path/to/project" do
+    dev false
+    quiet true
+    action :install
+end
+
+#update project vendors
+composer_project "/path/to/project" do
+    dev false
+    quiet true
+    action :update
+end
+
+#dump-autoload for project
+composer_project "/path/to/project" do
+    dev false
+    quiet true
+    action :dump_autoload
+end
+```
+
 Usage
 =====
 
 1) include `recipe[composer]` in a run list
 2) tweak the attributes via attributes/default.rb
-	--- OR ---
-	override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+    --- OR ---
+    override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 References
 ==========
