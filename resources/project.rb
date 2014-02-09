@@ -9,8 +9,8 @@ actions :install, :update, :dump_autoload
 default_action :install
 
 attribute :project_dir, :kind_of => String, :name_attribute => true
-attribute :dev, :equal_to => [TrueClass, FalseClass], :default => false
-attribute :quiet, :equal_to => [TrueClass, FalseClass], :default => true
+attribute :dev, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :quiet, :kind_of => [TrueClass, FalseClass], :default => true
 
 def initialize(*args)
     super
