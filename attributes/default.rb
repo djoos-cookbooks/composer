@@ -13,6 +13,7 @@ else
     default['composer']['url'] = "http://getcomposer.org/composer.phar"
     default['composer']['install_dir'] = "/usr/local/bin"
     default['composer']['install_globally'] = true
+    default['composer']['chmod'] = "0755"
     default['composer']['bin'] = "#{node['composer']['install_dir']}/composer"
 end
 
