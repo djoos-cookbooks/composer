@@ -32,10 +32,12 @@ This cookbook recommends the following cookbooks:
 Attributes
 ==========
 
-* `node['composer']['install_globally']` - Installation method, ':source' or ':package' - default true
-* `node['composer']['prefix']` - Location prefix of where the installation files will go if installing globally
 * `node['composer']['url']` - Location of the source
 * `node['composer']['install_dir']` - Installation target directory (absolute or relative path) if installing locally
+* `node['composer']['bin']` - bin directory
+* `node['composer']['install_globally']` - Installation method, ':source' or ':package' - default true
+* `node['composer']['global_configs']` - Hash with global config options for users, eg. { "userX" => { "github-oauth" => { "github.com" => "userX_oauth_token" }, "vendor-dir" => "myvendordir" } }
+* `node['composer']['php_recipe']` - The php recipe to include, defaults to "php::default"
 
 Resources / Providers
 =====================
@@ -96,7 +98,7 @@ License and Authors
 
 Author: David Joos <david@escapestudios.com>
 Author: Escape Studios Development <dev@escapestudios.com>
-Copyright: 2012-2013, Escape Studios
+Copyright: 2012-2014, Escape Studios
 
 Unless otherwise noted, all files are released under the MIT license,
 possible exceptions will contain licensing information in them.

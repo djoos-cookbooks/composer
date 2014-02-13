@@ -2,7 +2,7 @@
 # Cookbook Name:: composer
 # Resource:: project
 #
-# Copyright 2012-2013, Escape Studios
+# Copyright 2012-2014, Escape Studios
 #
 
 actions :install, :update, :dump_autoload

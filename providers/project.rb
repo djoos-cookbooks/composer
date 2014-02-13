@@ -2,7 +2,7 @@
 # Cookbook Name:: composer
 # Resource:: project
 #
-# Copyright 2012-2013, Escape Studios
+# Copyright 2012-2014, Escape Studios
 #
 
 use_inline_resources if defined?(use_inline_resources)
@@ -47,3 +47,5 @@ action :dump_autoload do
         only_if "which composer"
     end
 end
+
+new_resource.updated_by_last_action(true)

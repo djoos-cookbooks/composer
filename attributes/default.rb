@@ -2,7 +2,7 @@
 # Cookbook Name:: composer
 # Attributes:: default
 #
-# Copyright 2012-2013, Escape Studios
+# Copyright 2012-2014, Escape Studios
 #
 
 if node['platform'] == "windows"
@@ -12,8 +12,9 @@ if node['platform'] == "windows"
 else
     default['composer']['url'] = "http://getcomposer.org/composer.phar"
     default['composer']['install_dir'] = "/usr/local/bin"
-    default['composer']['install_globally'] = true
     default['composer']['bin'] = "#{node['composer']['install_dir']}/composer"
+    default['composer']['install_globally'] = true
 end
 
+default['composer']['global_configs'] = {}
 default['composer']['php_recipe'] = "php::default"
