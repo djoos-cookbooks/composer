@@ -20,8 +20,7 @@ if node['platform'] == "windows"
     ENV['PATH'] += ";#{install_dir}"
     windows_path install_dir
 else
-    log "composer-phar" do
-        message "phar (PHP archive) not supported..."
+    log "[composer] phar (PHP archive) not supported" do
         level :warn
         not_if "php -m | grep 'Phar'"
     end

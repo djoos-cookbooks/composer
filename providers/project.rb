@@ -20,8 +20,9 @@ action :install do
         command "#{node['composer']['bin']} install --no-interaction --no-ansi #{quiet} #{dev}"
         action :run
         only_if "which composer"
-
     end
+
+    new_resource.updated_by_last_action(true)
 end
 
 action :update do
@@ -34,6 +35,8 @@ action :update do
         action :run
         only_if "which composer"
     end
+
+    new_resource.updated_by_last_action(true)
 end
 
 action :dump_autoload do
@@ -46,6 +49,6 @@ action :dump_autoload do
         action :run
         only_if "which composer"
     end
-end
 
-new_resource.updated_by_last_action(true)
+    new_resource.updated_by_last_action(true)
+end
