@@ -36,7 +36,8 @@ Attributes
 * `node['composer']['install_dir']` - Installation target directory (absolute or relative path) if installing locally
 * `node['composer']['bin']` - bin directory
 * `node['composer']['install_globally']` - Installation method, ':source' or ':package' - default true
-* `node['composer']['global_configs']` - Hash with global config options for users, eg. { "userX" => { "github-oauth" => { "github.com" => "userX_oauth_token" }, "vendor-dir" => "myvendordir" } }
+* `node['composer']['mask']` - Mask for composer.phar - 0755
+* `node['composer']['global_configs']` - Hash with global config options for users, eg. { "userX" => { "github-oauth" => { "github.com" => "userX_oauth_token" }, "vendor-dir" => "myvendordir" } } - default {}
 * `node['composer']['php_recipe']` - The php recipe to include, defaults to "php::default"
 
 Resources / Providers
