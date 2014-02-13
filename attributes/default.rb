@@ -14,6 +14,7 @@ else
     default['composer']['install_dir'] = "/usr/local/bin"
     default['composer']['bin'] = "#{node['composer']['install_dir']}/composer"
     default['composer']['install_globally'] = true
+    default['composer']['mask'] = "0755"
 end
 
 default['composer']['global_configs'] = {}
