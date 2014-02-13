@@ -20,6 +20,12 @@ if node['platform'] == "windows"
     ENV['PATH'] += ";#{install_dir}"
     windows_path install_dir
 else
+    log "composer-phar" do
+        message "phar (PHP archive) not supported..."
+        level :warn
+        not_if "php -m | grep 'Phar'"
+    end
+
     cache_dir = "#{Chef::Config[:file_cache_path]}/composer"
 
     directory cache_dir do
