@@ -75,7 +75,6 @@ end
 
 #dump-autoload for project
 composer_project "/path/to/project" do
-    dev false
     quiet true
     action :dump_autoload
 end
