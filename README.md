@@ -56,6 +56,7 @@ This cookbook includes an LWRP for managing a Composer project
 - project_dir: The directory where your project's composer.json can be found
 - dev: Install packages listed in require-dev, default false
 - quiet: Do not output any message, default true
+- optimize_autoloader: Optimize PSR0 packages to use classmaps, default false
 
 #### Examples
 ```
