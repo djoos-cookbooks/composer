@@ -13,6 +13,7 @@ unless configs.nil?
             owner user
             group user
             mode 0755
+            action :create
         end
 
         unless user_configs.nil?
