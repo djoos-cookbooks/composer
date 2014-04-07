@@ -10,5 +10,6 @@ include_recipe "composer::install"
 execute "composer-self_update" do
     cwd node['composer']['install_dir']
     command "composer self-update"
+    environment "COMPOSER_HOME" => node['composer']['install_dir']
     action :run
 end
