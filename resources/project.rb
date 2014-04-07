@@ -14,6 +14,6 @@ attribute :quiet, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :optimize_autoloader, :kind_of => [TrueClass, FalseClass], :default => false
 
 def initialize(*args)
-    super
-    @action = :install
+  super
+  @action = :install
 end

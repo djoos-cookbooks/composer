@@ -11,9 +11,10 @@ Requirements
 
 ## Cookbooks:
 
+* php
+
 This cookbook recommends the following cookbooks:
 
-* php
 * windows
 
 ### Depending on your environment, these recommended cookbooks are actual dependencies (depends):

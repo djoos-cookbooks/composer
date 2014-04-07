@@ -5,11 +5,11 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-include_recipe "composer::install"
+include_recipe 'composer::install'
 
-execute "composer-self_update" do
-    cwd node['composer']['install_dir']
-    command "composer self-update"
-    environment "COMPOSER_HOME" => node['composer']['install_dir']
-    action :run
+execute 'composer-self_update' do
+  cwd node['composer']['install_dir']
+  command 'composer self-update'
+  environment 'COMPOSER_HOME' => node['composer']['install_dir']
+  action :run
 end
