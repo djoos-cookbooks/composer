@@ -12,4 +12,5 @@ execute 'composer-self_update' do
   command 'composer self-update'
   environment 'COMPOSER_HOME' => node['composer']['install_dir']
   action :run
+  ignore_failure true
 end
