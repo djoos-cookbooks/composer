@@ -10,7 +10,7 @@ include_recipe node['composer']['php_recipe']
 if node['platform'] == 'windows'
   windows_package 'Composer - PHP Dependency Manager' do
     source node['composer']['url']
-    options %W(
+    options %w(
       /VERYSILENT
     ).join(' ')
   end
