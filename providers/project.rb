@@ -55,3 +55,20 @@ action :dump_autoload do
 
   new_resource.updated_by_last_action(true)
 end
+
+action :create_project do
+  stability = new_resource.stability
+  repository_url = new_resource.repository_url
+  package_name = new_resource.package_name
+  path_to_install = new_resource.project_dir
+  version = new_resource.version
+
+  execute 'composer-create-project' do
+    cwd new_resource.project_dir
+    command "#{node['composer']['bin']} create-project -s#{stability} --repository-url=\"#{repository_url}\" #{package_name} #{path_to_install} #{version}"
+    action :run
+    only_if 'which composer'
+  end
+
+  new_resource.updated_by_last_action(true)
+end
