@@ -67,6 +67,7 @@ This cookbook includes an LWRP for managing a Composer project
 composer_project "/path/to/project" do
     dev false
     quiet true
+    prefer_dist false
     action :install
 end
 
