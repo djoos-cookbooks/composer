@@ -16,24 +16,24 @@ unless configs.nil?
       action :create
     end
 
-    unless user_configs.nil?
-      user_configs.each_pair do |option, value|
-        if value.respond_to?(:each_pair)
-          value.each_pair do |value_k, value_v|
-            execute "composer-config-for-#{user}" do
-              command "composer config --global #{option}.#{value_k} #{value_v}"
-              user user
-              group user
-              action :run
-            end
-          end
-        else
+    user_configs.nil? && next
+
+    user_configs.each_pair do |option, value|
+      if value.respond_to?(:each_pair)
+        value.each_pair do |value_k, value_v|
           execute "composer-config-for-#{user}" do
-            command "composer config --global #{option} #{value}"
+            command "composer config --global #{option}.#{value_k} #{value_v}"
             user user
             group user
             action :run
           end
+        end
+      else
+        execute "composer-config-for-#{user}" do
+          command "composer config --global #{option} #{value}"
+          user user
+          group user
+          action :run
         end
       end
     end
