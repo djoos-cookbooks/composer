@@ -12,47 +12,33 @@ def whyrun_supported?
 end
 
 action :install do
-  dev = new_resource.dev ? '--dev' : '--no-dev'
-  quiet = new_resource.quiet ? '--quiet' : ''
-  optimize = new_resource.optimize_autoloader ? '--optimize-autoloader' : ''
-  prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
-
-  execute 'install-composer-for-project' do
-    cwd new_resource.project_dir
-    command "#{node['composer']['bin']} install --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist}"
-    action :run
-    only_if 'which composer'
-  end
-
+  make_execute 'install'
   new_resource.updated_by_last_action(true)
 end
 
 action :update do
-  dev = new_resource.dev ? '--dev' : '--no-dev'
-  quiet = new_resource.quiet ? '--quiet' : ''
-  optimize = new_resource.optimize_autoloader ? '--optimize-autoloader' : ''
-
-  execute 'update-composer-for-project' do
-    cwd new_resource.project_dir
-    command "#{node['composer']['bin']} update --no-interaction --no-ansi #{quiet} #{dev} #{optimize}"
-    action :run
-    only_if 'which composer'
-  end
-
+  make_execute 'update'
   new_resource.updated_by_last_action(true)
 end
 
 action :dump_autoload do
+  make_execute 'dump-autoload'
+  new_resource.updated_by_last_action(true)
+end
+
+def make_execute(cmd)
   dev = new_resource.dev ? '--dev' : '--no-dev'
   quiet = new_resource.quiet ? '--quiet' : ''
   optimize = new_resource.optimize_autoloader ? '--optimize' : ''
+  prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
 
-  execute 'dump-autoload-composer-for-project' do
+  return execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
-    command "#{node['composer']['bin']} dump-autoload --no-interaction --no-ansi #{quiet} #{dev} #{optimize}"
+    command "#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist}"
     action :run
     only_if 'which composer'
+    user new_resource.user
+    group new_resource.group
+    umask new_resource.umask
   end
-
-  new_resource.updated_by_last_action(true)
 end
