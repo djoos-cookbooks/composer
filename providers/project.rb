@@ -32,7 +32,7 @@ def make_execute(cmd)
   optimize = new_resource.optimize_autoloader ? '--optimize' : ''
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
 
-  return execute "#{cmd}-composer-for-project" do
+  execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist}"
     action :run
