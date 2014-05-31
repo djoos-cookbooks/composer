@@ -12,6 +12,7 @@ attribute :project_dir, :kind_of => String, :name_attribute => true
 attribute :dev, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :quiet, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :optimize_autoloader, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :prefer_dist, :kind_of => [TrueClass, FalseClass], :default => false
 
 def initialize(*args)
   super
