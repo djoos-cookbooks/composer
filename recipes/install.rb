@@ -51,5 +51,6 @@ else
   link file do
     to cache_file
     action :create
+    link_type :hard
   end
 end
