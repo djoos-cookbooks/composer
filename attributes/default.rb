@@ -17,6 +17,7 @@ else
   default['composer']['bin'] = "#{node['composer']['install_dir']}/composer"
   default['composer']['install_globally'] = true
   default['composer']['mask'] = 0755
+  default['composer']['link_type'] = :symbolic
 end
 
 default['composer']['global_configs'] = {}

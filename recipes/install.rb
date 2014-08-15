@@ -50,7 +50,7 @@ else
 
   link file do
     to cache_file
+    link_type node['composer']['link_type']
     action :create
-    link_type :hard
   end
 end
