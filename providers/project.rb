@@ -29,7 +29,7 @@ end
 def make_execute(cmd)
   dev = new_resource.dev ? '--dev' : '--no-dev'
   quiet = new_resource.quiet ? '--quiet' : ''
-  optimize = new_resource.optimize_autoloader ? '--optimize' : ''
+  optimize = new_resource.optimize_autoloader ? optimize_flag(cmd) : ''
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
 
   execute "#{cmd}-composer-for-project" do
@@ -42,4 +42,8 @@ def make_execute(cmd)
     group new_resource.group
     umask new_resource.umask
   end
+end
+
+def optimize_flag(cmd)
+  return %(install update).include? cmd ? '--optimize-autoloader' : '--optimize'
 end
