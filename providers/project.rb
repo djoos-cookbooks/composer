@@ -45,5 +45,5 @@ def make_execute(cmd)
 end
 
 def optimize_flag(cmd)
-  return %(install update).include? cmd ? '--optimize-autoloader' : '--optimize'
+  %(install update).include? cmd ? '--optimize-autoloader' : '--optimize'
 end
