@@ -39,8 +39,8 @@ def make_execute(cmd)
     action      :run
     only_if     'which composer'
     user        new_resource.user     if new_resource.user
-    creates     new_resource.creates  if new_resource.creates
     group       new_resource.group    if new_resource.group
+    creates     new_resource.creates  if new_resource.creates
     path        new_resource.path     if new_resource.path
     returns     new_resource.returns  if new_resource.returns
     timeout     new_resource.timeout  if new_resource.timeout
