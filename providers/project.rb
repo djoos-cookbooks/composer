@@ -65,7 +65,7 @@ def build_script_code(cmd)
   script.join("\n")
 end
 
-def build_script_environment
+def build_script_environment(cmd)
   script_env = { 'COMPOSER_HOME' => node['composer']['install_dir'] }
   if new_resource.environment
     script_env.merge!(new_resource.environment)
