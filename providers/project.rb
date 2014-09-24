@@ -26,24 +26,49 @@ action :dump_autoload do
   new_resource.updated_by_last_action(true)
 end
 
-def make_execute(cmd)
-  dev = new_resource.dev ? '--dev' : '--no-dev'
-  quiet = new_resource.quiet ? '--quiet' : ''
-  optimize = new_resource.optimize_autoloader ? optimize_flag(cmd) : ''
-  prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
+private
 
-  execute "#{cmd}-composer-for-project" do
-    cwd new_resource.project_dir
-    command "#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist}"
-    environment 'COMPOSER_HOME' => node['composer']['install_dir']
-    action :run
-    only_if 'which composer'
-    user new_resource.user
-    group new_resource.group
-    umask new_resource.umask
+def make_execute(cmd)
+  script_code         = build_script_code(cmd)
+  script_environment  = build_script_environment(cmd)
+
+  script "#{cmd}-composer-for-project" do
+    interpreter "bash"
+    cwd         new_resource.project_dir
+    code        script_code
+    action      :run
+    only_if     'which composer'
+    user        new_resource.user     if new_resource.user
+    group       new_resource.group    if new_resource.group
+    creates     new_resource.creates  if new_resource.creates
+    path        new_resource.path     if new_resource.path
+    returns     new_resource.returns  if new_resource.returns
+    timeout     new_resource.timeout  if new_resource.timeout
+    umask       new_resource.umask    if new_resource.umask
+    environment(script_environment)
   end
 end
 
 def optimize_flag(cmd)
   %(install update).include? cmd ? '--optimize-autoloader' : '--optimize'
+end
+
+def build_script_code(cmd)
+  dev = new_resource.dev ? '--dev' : '--no-dev'
+  quiet = new_resource.quiet ? '--quiet' : ''
+  optimize = new_resource.optimize_autoloader ? optimize_flag(cmd) : ''
+  prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
+
+  script = []
+  script << new_resource.code
+  script << %{#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist}}
+  script.join("\n")
+end
+
+def build_script_environment(cmd)
+  script_env = { 'COMPOSER_HOME' => node['composer']['install_dir'] }
+  if new_resource.environment
+    script_env.merge!(new_resource.environment)
+  end
+  script_env
 end
