@@ -16,6 +16,10 @@ unless configs.nil?
       action :create
     end
 
+    if node['composer']['home_dir'].nil?
+      node.set['composer']['home_dir'] = "/home/#{user}/.composer"
+    end
+    
     user_configs.nil? && next
 
     user_configs.each_pair do |option, value|
@@ -23,7 +27,7 @@ unless configs.nil?
         value.each_pair do |value_k, value_v|
           execute "composer-config-for-#{user}" do
             command "composer config --global #{option}.#{value_k} #{value_v}"
-            environment 'COMPOSER_HOME' => node['composer']['install_dir']
+            environment 'COMPOSER_HOME' => node['composer']['home_dir']
             user user
             group user
             action :run
@@ -32,7 +36,7 @@ unless configs.nil?
       else
         execute "composer-config-for-#{user}" do
           command "composer config --global #{option} #{value}"
-          environment 'COMPOSER_HOME' => node['composer']['install_dir']
+          environment 'COMPOSER_HOME' => node['composer']['home_dir']
           user user
           group user
           action :run
