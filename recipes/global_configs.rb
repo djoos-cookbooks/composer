@@ -19,7 +19,7 @@ unless configs.nil?
     if node['composer']['home_dir'].nil?
       node.set['composer']['home_dir'] = "/home/#{user}/.composer"
     end
-    
+
     user_configs.nil? && next
 
     user_configs.each_pair do |option, value|
