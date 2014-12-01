@@ -42,6 +42,7 @@ Attributes
 * `node['composer']['mask']` - Mask for composer.phar - 0755
 * `node['composer']['link_type']` - link type for composer.phar link - default :symbolic
 * `node['composer']['global_configs']` - Hash with global config options for users, eg. { "userX" => { "github-oauth" => { "github.com" => "userX_oauth_token" }, "vendor-dir" => "myvendordir" } } - default {}
+* `node['composer']['home_dir']` - COMPOSER_HOME, defaults to nil (in which case install_dir will be used)
 * `node['composer']['php_recipe']` - The php recipe to include, defaults to "php::default"
 
 Resources / Providers

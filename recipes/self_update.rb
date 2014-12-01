@@ -7,14 +7,10 @@
 
 include_recipe 'composer::install'
 
-if node['composer']['home_dir'].nil?
-  node.set['composer']['home_dir'] = node['composer']['install_dir']
-end
-
 execute 'composer-self_update' do
   cwd node['composer']['install_dir']
   command 'composer self-update'
-  environment 'COMPOSER_HOME' => node['composer']['home_dir']
+  environment 'COMPOSER_HOME' => Composer.home_dir(node)
   action :run
   ignore_failure true
 end
