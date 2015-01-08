@@ -19,5 +19,5 @@ group :integration do
   gem 'chef'
   gem 'test-kitchen'
   gem 'kitchen-vagrant'
-  gem 'serverspec', '~> 2.0'
+  gem 'serverspec'
 end
