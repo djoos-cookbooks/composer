@@ -12,12 +12,12 @@ group :unit, :integration do
 end
 
 group :unit do
-  gem 'chefspec', '~> 3.1'
-  gem 'rspec-expectations', '~> 2.14.0'
+  gem 'chefspec'
 end
 
 group :integration do
-  gem 'test-kitchen', '~> 1.2'
-  gem 'kitchen-vagrant', '~> 0.11'
-  gem 'serverspec', '~> 1.0'
+  gem 'chef'
+  gem 'test-kitchen'
+  gem 'kitchen-vagrant'
+  gem 'serverspec', '~> 2.0'
 end
