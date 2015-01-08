@@ -7,7 +7,7 @@ describe package('php5') do
 end
 
 describe command("php -m | grep 'Phar'") do
-  its(:stdout) { should match /Phar/ }
+  its(:stdout) { should match 'Phar' }
 end
 
 describe file('/usr/local/bin/composer') do

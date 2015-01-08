@@ -12,8 +12,7 @@ group :unit, :integration do
 end
 
 group :unit do
-  gem 'chefspec', '~> 3.1'
-  gem 'rspec-expectations', '~> 2.14.0'
+  gem 'chefspec'
 end
 
 group :integration do
