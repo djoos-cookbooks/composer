@@ -18,3 +18,7 @@ UselessAssignment:
 
 MethodLength:
   Enabled: false
+
+AbcSize:
+  Enabled: false
+  
