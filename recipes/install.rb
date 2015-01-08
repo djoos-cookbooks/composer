@@ -25,32 +25,12 @@ else
     not_if "php -m | grep 'Phar'"
   end
 
-  cache_dir = "#{Chef::Config[:file_cache_path]}/composer"
+  file = node['composer']['install_globally'] ? "#{node['composer']['install_dir']}/composer" : "#{node['composer']['install_dir']}/composer.phar"
 
-  directory cache_dir do
-    action :create
-  end
-
-  cache_file = "#{cache_dir}/composer.phar"
-
-  remote_file cache_file do
+  remote_file file do
     source node['composer']['url']
     mode node['composer']['mask']
     action :create
-    not_if do
-      ::File.exist?(cache_file)
-    end
-  end
-
-  if node['composer']['install_globally']
-    file = "#{node['composer']['install_dir']}/composer"
-  else
-    file = "#{node['composer']['install_dir']}/composer.phar"
-  end
-
-  link file do
-    to cache_file
-    link_type node['composer']['link_type']
-    action :create
+    not_if { ::File.exist?(file) }
   end
 end
