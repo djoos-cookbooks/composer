@@ -19,7 +19,7 @@ end
 
 def get_vendor_execute(cmd)
   dev = new_resource.dev ? '--dev' : '--update-no-dev'
-  repo = new_resource.vendor
+  vendor = new_resource.vendor
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
 
   execute "#{cmd}-composer-for-project" do
