@@ -8,6 +8,8 @@ This cookbook provides an easy way to install Composer, a dependency manager for
 More information?
 http://getcomposer.org/
 
+
+
 Requirements
 ============
 
