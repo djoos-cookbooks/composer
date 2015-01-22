@@ -8,6 +8,8 @@ This cookbook provides an easy way to install Composer, a dependency manager for
 More information?
 http://getcomposer.org/
 
+
+
 Requirements
 ============
 
@@ -87,6 +89,26 @@ composer_project "/path/to/project" do
     action :dump_autoload
 end
 ```
+
+### `composer_vendor`
+
+#### Actions
+- :Require: Creates and reads the composer.json file. File is created by specifying a single vendor repo to install from - this is the default and only action
+
+#### Attribute parameters
+- vendor: The vendor repo to create project's composer.json 
+- dev: Install packages listed in require-dev, default false
+- quiet: Do not output any message, default true
+
+#### Examples
+```
+#create and install single project vendor 
+composer_vendor 'github/repo' do
+  dev false
+  prefer_dist false
+  action :require
+end
+
 
 Usage
 =====
