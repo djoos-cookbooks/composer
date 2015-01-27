@@ -88,27 +88,24 @@ composer_project "/path/to/project" do
     quiet true
     action :dump_autoload
 end
-```
 
-### `composer_vendor`
 
-#### Actions
-- :Require: Creates and reads the composer.json file. File is created by specifying a single vendor repo to install from - this is the default and only action
-
-#### Attribute parameters
-- vendor: The vendor repo to create project's composer.json 
-- dev: Install packages listed in require-dev, default false
-- quiet: Do not output any message, default true
-
-#### Examples
-```
-#create and install single project vendor 
-composer_vendor 'github/repo' do
+#install single project vendor (creates composer.json and installs project)
+composer_single_project "Install vendor_name" do
+  path "/path/to/install/project"
   dev false
-  prefer_dist false
-  action :require
+  vendor 'vendor/project'
+  action :install
 end
 
+#require single project vendor (add new packages to composer.json)
+composer_single_project "Install vendor_name" do
+  path "/path/to/install/project"
+  dev false
+  vendor 'vendor/project'
+  action :require
+end
+```
 
 Usage
 =====
