@@ -8,6 +8,8 @@ This cookbook provides an easy way to install Composer, a dependency manager for
 More information?
 http://getcomposer.org/
 
+
+
 Requirements
 ============
 
@@ -85,6 +87,23 @@ composer_project "/path/to/project" do
     dev false
     quiet true
     action :dump_autoload
+end
+
+
+#install single project vendor (creates composer.json and installs project)
+composer_single_project "Install vendor_name" do
+  path "/path/to/install/project"
+  dev false
+  vendor 'vendor/project'
+  action :install
+end
+
+#require single project vendor (add new packages to composer.json)
+composer_single_project "Install vendor_name" do
+  path "/path/to/install/project"
+  dev false
+  vendor 'vendor/project'
+  action :require
 end
 ```
 

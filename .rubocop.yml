@@ -21,4 +21,7 @@ MethodLength:
 
 AbcSize:
   Enabled: false
+
+Documentation:
+  Enabled: false
   
