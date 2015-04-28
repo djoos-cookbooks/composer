@@ -16,6 +16,7 @@ attribute :prefer_dist, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :user, :kind_of => String, :default => 'root'
 attribute :group, :kind_of => String, :default => 'root'
 attribute :umask, :kind_of => [String, Fixnum], :default => 0002
+attribute :git_ssh_wrapper, :kind_of => String, :default => nil
 
 def initialize(*args)
   super

@@ -31,11 +31,13 @@ def make_execute(cmd)
   quiet = new_resource.quiet ? '--quiet' : ''
   optimize = new_resource.optimize_autoloader ? optimize_flag(cmd) : ''
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
+  env = { 'COMPOSER_HOME' => Composer.home_dir(node) }
+  env['GIT_SSH'] = new_resource.git_ssh_wrapper if new_resource.git_ssh_wrapper
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist}"
-    environment 'COMPOSER_HOME' => Composer.home_dir(node)
+    environment env
     action :run
     only_if 'which composer'
     user new_resource.user
