@@ -31,10 +31,11 @@ def make_execute(cmd)
   quiet = new_resource.quiet ? '--quiet' : ''
   optimize = new_resource.optimize_autoloader ? optimize_flag(cmd) : ''
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
+  prefer_source = new_resource.prefer_source ? '--prefer-source' : ''
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
-    command "#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist}"
+    command "#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist} #{prefer_source}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
     only_if 'which composer'
