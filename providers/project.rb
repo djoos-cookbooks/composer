@@ -16,11 +16,6 @@ action :install do
   new_resource.updated_by_last_action(true)
 end
 
-# action :single do
-#   require_single_project
-#   install_single_project
-# end
-
 action :require do
   make_require
 end
@@ -85,24 +80,6 @@ def remove_vendor(cmd)
     only_if 'which composer'
   end
 end
-
-# def install_single_project
-#   path = new_resource.path
-#   vendor = new_resource.vendor
-#   dev = new_resource.dev ? '--dev' : '--no-dev'
-#   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
-#
-#   execute 'Install-composer-for-project' do
-#     cwd path
-#     command "#{node['composer']['bin']} install #{dev}"
-#     environment 'COMPOSER_HOME' => Composer.home_dir(node)
-#     action :run
-#     only_if 'which composer'
-#     user new_resource.user
-#     group new_resource.group
-#     umask new_resource.umask
-#   end
-# end
 
 def optimize_flag(cmd)
   (%(install update).include? cmd) ? '--optimize-autoloader' : '--optimize'
