@@ -7,4 +7,8 @@ module Composer
   def self.home_dir(node)
     node['composer']['home_dir'] || install_dir(node)
   end
+
+  def self.bin_dir(node)
+    node['composer']['bin_dir'] || ''
+  end
 end
