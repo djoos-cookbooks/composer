@@ -46,7 +46,6 @@ def make_execute(cmd)
     command "#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist} #{prefer_source}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
-    only_if 'which composer'
     user new_resource.user
     group new_resource.group
     umask new_resource.umask
@@ -63,7 +62,6 @@ def make_require
     command "#{node['composer']['bin']} require #{vendor} #{dev} #{prefer_dist}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
-    only_if 'which composer'
     user new_resource.user
     group new_resource.group
     umask new_resource.umask
@@ -78,7 +76,6 @@ def remove_vendor(cmd)
     command "#{node['composer']['bin']} remove #{vendor}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
-    only_if 'which composer'
   end
 end
 
