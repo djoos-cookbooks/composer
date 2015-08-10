@@ -73,7 +73,7 @@ def remove_vendor(cmd)
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
-    command "#{node['composer']['bin']} remove #{vendor}"
+    command "#{node['composer']['bin']} remove #{vendor} --update-with-dependencies"
     environment 'COMPOSER_HOME' => Composer.home_dir(node), 'COMPOSER_BIN_DIR' => Composer.bin_dir(node)
     action :run
   end
