@@ -10,7 +10,6 @@ default_action :install
 
 attribute :project_dir, :kind_of => String, :required => true
 attribute :vendor, :kind_of => String, :name_attribute => true, :required => true
-attribute :path, :kind_of => String, :default => nil
 attribute :dev, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :quiet, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :optimize_autoloader, :kind_of => [TrueClass, FalseClass], :default => false
