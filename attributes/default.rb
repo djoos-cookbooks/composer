@@ -15,6 +15,7 @@ else
   default['composer']['url'] = 'http://getcomposer.org/composer.phar'
   default['composer']['install_dir'] = '/usr/local/bin'
   default['composer']['bin'] = "#{node['composer']['install_dir']}/composer"
+  default['composer']['bin_dir'] = '/usr/local/bin'
   default['composer']['install_globally'] = true
   default['composer']['mask'] = 0755
   default['composer']['link_type'] = :symbolic
