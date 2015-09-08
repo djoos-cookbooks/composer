@@ -5,8 +5,6 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-include_attribute 'php'
-
 if node['platform'] == 'windows'
   default['composer']['url'] = 'https://getcomposer.org/Composer-Setup.exe'
   default['composer']['install_dir'] = 'C:\\ProgramData\\ComposerSetup'
@@ -22,4 +20,3 @@ end
 
 default['composer']['global_configs'] = {}
 default['composer']['home_dir'] = nil
-default['composer']['php_recipe'] = 'php::default'

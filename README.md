@@ -13,14 +13,14 @@ Requirements
 
 ## Cookbooks:
 
+This cookbook has no external dependencies, but recommends the following cookbooks:
+
 * php
-
-This cookbook recommends the following cookbooks:
-
 * windows
 
 ### Depending on your environment, these recommended cookbooks are actual dependencies (depends):
-* Using the community PHP cookbook to get PHP installed? You'll need the php cookbook to be available.
+* Using the community PHP cookbook to install PHP? You'll need the php cookbook to be
+available and its recipe included earlier in your run list (e.g. `recipe[php::default]`).
 * Running on Windows? You'll need the windows cookbook to be available.
 
 ## Platforms:
@@ -43,7 +43,6 @@ Attributes
 * `node['composer']['link_type']` - link type for composer.phar link - default :symbolic
 * `node['composer']['global_configs']` - Hash with global config options for users, eg. { "userX" => { "github-oauth" => { "github.com" => "userX_oauth_token" }, "vendor-dir" => "myvendordir" } } - default {}
 * `node['composer']['home_dir']` - COMPOSER_HOME, defaults to nil (in which case install_dir will be used), please do read the [Composer documentation on COMPOSER_HOME](https://getcomposer.org/doc/03-cli.md#composer-home) when setting a custom home_dir
-* `node['composer']['php_recipe']` - The php recipe to include, defaults to "php::default"
 
 Resources / Providers
 =====================
@@ -80,7 +79,7 @@ composer_project "/path/to/project" do
     dev false
     quiet true
     prefer_dist false
-    action :require 
+    action :require
 end
 
 #update project vendors
