@@ -13,12 +13,12 @@ Requirements
 
 ## Cookbooks:
 
-This cookbook has no external dependencies, but recommends the following cookbooks:
+This cookbook has no external dependencies, but suggests the following cookbooks:
 
 * php
 * windows
 
-### Depending on your environment, these recommended cookbooks are actual dependencies (depends):
+### Depending on your environment, these suggested cookbooks are actual dependencies (depends):
 * Using the community PHP cookbook to install PHP? You'll need the php cookbook to be
 available and its recipe included earlier in your run list (e.g. `recipe[php::default]`).
 * Running on Windows? You'll need the windows cookbook to be available.

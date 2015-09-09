@@ -10,8 +10,8 @@ version '2.2.0'
   supports os
 end
 
-recommends 'php'
-recommends 'windows'
+suggests 'php'
+suggests 'windows'
 
 recipe 'composer', 'Installs (if applicable) and self-updates composer.'
 recipe 'composer::install', 'Installs composer.'
