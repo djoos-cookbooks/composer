@@ -4,7 +4,7 @@ maintainer_email 'dev@escapestudios.com'
 license 'MIT'
 description 'Installs/Configures Composer'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '2.2.0'
+version '2.2.1'
 
 %w( debian ubuntu redhat centos fedora scientific amazon windows ).each do |os|
   supports os
