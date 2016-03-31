@@ -19,5 +19,5 @@ recipe 'composer::install', 'Installs composer.'
 recipe 'composer::self_update', 'Installs (if applicable) and self-updates composer.'
 recipe 'composer::global_configs', 'Sets up global config options via `composer config --global`'
 
-source_url 'https://github.com/escapestudios-cookbooks/composer'
-issues_url 'https://github.com/escapestudios-cookbooks/composer/issues'
+source_url 'https://github.com/escapestudios-cookbooks/composer' if respond_to?(:source_url)
+issues_url 'https://github.com/escapestudios-cookbooks/composer/issues' if respond_to?(:issues_url)
