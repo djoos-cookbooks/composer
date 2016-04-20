@@ -57,18 +57,25 @@ This cookbook includes an LWRP for managing a Composer project
 - :require Create composer.json file using specified vendor and downloads vendor.
 - :update: Gets the latest versions of the dependencies and updates the composer.lock file
 - :dump_autoload: Updates the autoloader without having to go through an install or update (eg. because of new classes in a classmap package)
-- :remove Removes vendor from composer.json and uninstalls
+- :remove Removes vendor from composer.json and uninstalls with all dependencies
 
 #### Attribute parameters
+- vendor: The name attribute, what package to install
 - project_dir: The directory where your project's composer.json can be found
 - dev: Install packages listed in require-dev, default false
 - quiet: Do not output any message, default true
 - optimize_autoloader: Optimize PSR0 packages to use classmaps, default false
+- prefer_dist: Install packages from dist when available, default false
+- prefer_source: Install packages from source when available, default false
+- user: The user as whichs to execute the commands, default root
+- group: The group as whichs to execute the commands, default root
+- umask: The umask to use during commands, default 0002
 
 #### Examples
 ```
 #install project vendors
-composer_project "/path/to/project" do
+composer_project "vendors" do
+    project_dir "/path/to/project"
     dev false
     quiet true
     prefer_dist false
@@ -76,30 +83,73 @@ composer_project "/path/to/project" do
 end
 
 #require project vendor
-composer_project "/path/to/project" do
+composer_project "vendor" do
+    project_dir "/path/to/project"
     dev false
     quiet true
     prefer_dist false
-    action :require 
+    action :require
 end
 
 #update project vendors
-composer_project "/path/to/project" do
+composer_project "vendors" do
+    project_dir "/path/to/project"
     dev false
     quiet true
     action :update
 end
 
-#dump-autoload for project
-composer_project "/path/to/project" do
+#dump-autoload for project vendor
+composer_project "vendor" do
+    project_dir "/path/to/project"
     dev false
     quiet true
     action :dump_autoload
 end
 
 #remove project vendor
-composer_project "/path/to/project" do
-    vendor 'repo/vendor'
+composer_project "vendor" do
+    project_dir "/path/to/project"
+    action :remove
+end
+```
+
+### `composer_install_global`
+
+#### Actions
+- :install: Install the given vendor in the given install_dir and creates symlinks.
+- :update: Gets the latest versions of the dependencies in the given install_dir
+- :remove Removes vendor from composer.json and uninstalls it with all dependencies
+
+#### Attribute parameters
+- vendor: The name attribute, what package to install
+- install_dir: The directory where the packages will be installed
+- dev: Install packages listed in require-dev, default false
+- quiet: Do not output any message, default true
+- optimize_autoloader: Optimize PSR0 packages to use classmaps, default false
+- prefer_dist: Install packages from dist when available, default false
+- prefer_source: Install packages from source when available, default false
+- user: The user as whichs to execute the commands, default root
+- group: The group as whichs to execute the commands, default root
+- umask: The umask to use during commands, default 0002
+
+#### Examples
+```
+#install project vendor/vendor
+composer_install_global "vendor/vendor" do
+    install_dir "/path/to/project"
+    action :install
+end
+
+#update project vendor/vendor
+composer_install_global "vendor/vendor" do
+    install_dir "/path/to/project"
+    action :update
+end
+
+#remove project vendor/vendor
+composer_install_global "vendor/vendor" do
+    install_dir "/path/to/project"
     action :remove
 end
 ```
