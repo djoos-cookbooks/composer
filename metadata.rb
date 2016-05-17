@@ -10,9 +10,6 @@ version '2.2.1'
   supports os
 end
 
-suggests 'php'
-suggests 'windows'
-
 recipe 'composer', 'Installs (if applicable) and self-updates composer.'
 recipe 'composer::install', 'Installs composer.'
 recipe 'composer::self_update', 'Installs (if applicable) and self-updates composer.'
