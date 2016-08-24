@@ -2,7 +2,7 @@
 # Cookbook Name:: composer
 # Recipe:: global_configs
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 configs = node['composer']['global_configs']

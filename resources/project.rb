@@ -2,7 +2,7 @@
 # Cookbook Name:: composer
 # Resource:: project
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 actions :install, :single, :require, :update, :dump_autoload, :remove
