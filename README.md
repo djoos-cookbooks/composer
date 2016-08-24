@@ -1,29 +1,22 @@
-[![Build Status](https://travis-ci.org/escapestudios-cookbooks/composer.png)](https://travis-ci.org/escapestudios-cookbooks/composer)
+[![Build Status](https://travis-ci.org/djoos-cookbooks/composer.png)](https://travis-ci.org/djoos-cookbooks/composer)
 
-Description
-===========
+# composer cookbook
+
+## Description
 
 This cookbook provides an easy way to install Composer, a dependency manager for PHP.
 
 More information?
 http://getcomposer.org/
 
-Requirements
-============
+## Requirements
 
-## Cookbooks:
+### Cookbooks:
 
 * php
-
-This cookbook recommends the following cookbooks:
-
 * windows
 
-### Depending on your environment, these recommended cookbooks are actual dependencies (depends):
-* Using the community PHP cookbook to get PHP installed? You'll need the php cookbook to be available.
-* Running on Windows? You'll need the windows cookbook to be available.
-
-## Platforms:
+### Platforms:
 
 * Ubuntu
 * Debian
@@ -32,8 +25,7 @@ This cookbook recommends the following cookbooks:
 * Fedora
 * Windows
 
-Attributes
-==========
+## Attributes
 
 * `node['composer']['url']` - Location of the source
 * `node['composer']['install_dir']` - Installation target directory (absolute or relative path) if installing locally
@@ -45,9 +37,7 @@ Attributes
 * `node['composer']['home_dir']` - COMPOSER_HOME, defaults to nil (in which case install_dir will be used), please do read the [Composer documentation on COMPOSER_HOME](https://getcomposer.org/doc/03-cli.md#composer-home) when setting a custom home_dir
 * `node['composer']['php_recipe']` - The php recipe to include, defaults to "php::default"
 
-Resources / Providers
-=====================
-
+## Resources / Providers
 This cookbook includes an LWRP for managing a Composer project
 
 ### `composer_project`
@@ -80,7 +70,7 @@ composer_project "/path/to/project" do
     dev false
     quiet true
     prefer_dist false
-    action :require 
+    action :require
 end
 
 #update project vendors
@@ -104,25 +94,25 @@ composer_project "/path/to/project" do
 end
 ```
 
-Usage
-=====
+## Usage
 
-1) include `recipe[composer]` in a run list
-2) tweak the attributes via attributes/default.rb
-    --- OR ---
-    override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+1. include `recipe[composer]` in a run list
+2. tweak the attributes via attributes/default.rb
+--- OR ---
+[override the attribute on a higher level](http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
-References
-==========
+## References
 
 * [Composer home page] (http://getcomposer.org/)
 
-License and Authors
-===================
+## License and Authors
+
+Author: David Joos <development@davidjoos.com>
+Copyright: 2016, David Joos
 
 Author: David Joos <david.joos@escapestudios.com>
 Author: Escape Studios Development <dev@escapestudios.com>
-Copyright: 2012-2014, Escape Studios
+Copyright: 2012-2015, Escape Studios
 
 Unless otherwise noted, all files are released under the MIT license,
 possible exceptions will contain licensing information in them.
