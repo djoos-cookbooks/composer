@@ -40,11 +40,12 @@ def make_execute(cmd)
   optimize = new_resource.optimize_autoloader ? optimize_flag(cmd) : ''
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
   prefer_source = new_resource.prefer_source ? '--prefer-source' : ''
+  environment = { 'COMPOSER_HOME' => Composer.home_dir(node) }.merge(new_resource.env)
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist} #{prefer_source}"
-    environment 'COMPOSER_HOME' => Composer.home_dir(node)
+    environment environment
     action :run
     only_if 'which composer'
     user new_resource.user
@@ -57,11 +58,12 @@ def make_require
   dev = new_resource.dev ? '--dev' : '--update-no-dev'
   vendor = new_resource.vendor
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
+  environment = { 'COMPOSER_HOME' => Composer.home_dir(node) }.merge(new_resource.env)
 
   execute 'Install-composer-for-single-project' do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} require #{vendor} #{dev} #{prefer_dist}"
-    environment 'COMPOSER_HOME' => Composer.home_dir(node)
+    environment environment
     action :run
     only_if 'which composer'
     user new_resource.user
@@ -72,11 +74,12 @@ end
 
 def remove_vendor(cmd)
   vendor = new_resource.vendor
+  environment = { 'COMPOSER_HOME' => Composer.home_dir(node) }.merge(new_resource.env)
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} remove #{vendor}"
-    environment 'COMPOSER_HOME' => Composer.home_dir(node)
+    environment environment
     action :run
     only_if 'which composer'
   end

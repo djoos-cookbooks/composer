@@ -19,6 +19,7 @@ attribute :prefer_source, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :user, :kind_of => String, :default => 'root'
 attribute :group, :kind_of => String, :default => 'root'
 attribute :umask, :kind_of => [String, Fixnum], :default => 0002
+attribute :env, :kind_of => [Hash], :default => {}
 
 def initialize(*args)
   super
