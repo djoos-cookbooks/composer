@@ -1,20 +1,21 @@
 #
 # Cookbook Name:: composer
-# Resource:: project
+# Resource:: install_global
 #
-# Copyright (c) 2016, David Joos
+# Copyright 2012-2014, Escape Studios
 #
 
-actions :install, :single, :require, :update, :dump_autoload, :remove
+actions :install, :update, :remove
 default_action :install
 
-attribute :project_dir, :kind_of => String, :required => true
-attribute :vendor, :kind_of => String, :name_attribute => true, :required => true
-attribute :dev, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :package, :kind_of => String, :name_attribute => true, :required => true
+attribute :install_dir, :kind_of => String #TODO: what to do with this? Can be driven by COMPOSER_HOME
+attribute :path, :kind_of => String, :default => nil
 attribute :quiet, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :optimize_autoloader, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :prefer_dist, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :prefer_source, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :prefer_stable, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :user, :kind_of => String, :default => 'root'
 attribute :group, :kind_of => String, :default => 'root'
 attribute :umask, :kind_of => [String, Fixnum], :default => 0002
