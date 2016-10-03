@@ -63,7 +63,10 @@ def make_require
     command "#{node['composer']['bin']} require #{package}:#{new_resource.version} #{dev} #{prefer_dist}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
-    not_if "#{node['composer']['bin']} show #{package} #{new_resource.version}"
+    not_if do
+        !new_resource.version.include?('*') &&
+        shell_out("cd #{new_resource.project_dir} && #{node['composer']['bin']} show #{package} #{new_resource.version}").exitstatus == 0
+      end
     user new_resource.user
     group new_resource.group
     umask new_resource.umask
