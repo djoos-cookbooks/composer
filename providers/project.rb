@@ -30,7 +30,7 @@ action :dump_autoload do
   new_resource.updated_by_last_action(true)
 end
 
-action :remove do
+action :remo§ do
   remove_package 'remove'
 end
 
@@ -44,7 +44,10 @@ def make_execute(cmd)
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist} #{prefer_source}"
-    environment 'COMPOSER_HOME' => Composer.home_dir(node)
+    environment ({
+      'COMPOSER_HOME' => Composer.home_dir(node),
+      'COMPOSER_BIN_DIR' => new_resource.bin_dir
+    })
     action :run
     user new_resource.user
     group new_resource.group
@@ -62,7 +65,10 @@ def make_require
   execute 'Install-composer-for-single-project' do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} require #{package}:#{new_resource.version} #{dev} #{prefer_dist}"
-    environment 'COMPOSER_HOME' => Composer.home_dir(node)
+    environment ({
+      'COMPOSER_HOME' => Composer.home_dir(node),
+      'COMPOSER_BIN_DIR' => new_resource.bin_dir
+    })
     action :run
     not_if do
       !new_resource.version.include?('*') &&
@@ -82,7 +88,10 @@ def remove_package(cmd)
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} remove #{package}"
-    environment 'COMPOSER_HOME' => Composer.home_dir(node)
+    environment ({
+      'COMPOSER_HOME' => Composer.home_dir(node),
+      'COMPOSER_BIN_DIR' => new_resource.bin_dir
+    })
     action :run
     only_if "#{node['composer']['bin']} show #{package} #{version}"
   end
