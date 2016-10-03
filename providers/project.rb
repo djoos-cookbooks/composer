@@ -44,7 +44,7 @@ def make_execute(cmd)
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist} #{prefer_source}"
-    environment ({
+    environment({
       'COMPOSER_HOME' => Composer.home_dir(node),
       'COMPOSER_BIN_DIR' => new_resource.bin_dir
     })
@@ -69,7 +69,7 @@ def make_require
   execute 'Install-composer-for-single-project' do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} require #{package}:#{new_resource.version} #{dev} #{prefer_dist}"
-    environment ({
+    environment({
       'COMPOSER_HOME' => Composer.home_dir(node),
       'COMPOSER_BIN_DIR' => new_resource.bin_dir
     })
@@ -91,8 +91,13 @@ def remove_package(cmd)
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
+<<<<<<< 639077b6a794ec77195371efebfad1c6af5b2e58
     command "#{node['composer']['bin']} remove #{package}"
     environment ({
+=======
+    command "#{node['composer']['bin']} remove #{package}:#{new_resource.version}"
+    environment({
+>>>>>>> Fix syntax errors
       'COMPOSER_HOME' => Composer.home_dir(node),
       'COMPOSER_BIN_DIR' => new_resource.bin_dir
     })
