@@ -32,7 +32,8 @@ def install_global_install
   directory install_dir
 
   composer_project install_dir do
-    vendor new_resource.package
+    package new_resource.package
+    version new_resource.version
     bin_dir bin_dir
     dev new_resource.dev
     quiet new_resource.quiet
@@ -47,7 +48,8 @@ def install_global_remove
   install_dir = new_resource.install_dir ? new_resource.install_dir : node['composer']['global_install']['install_dir']
 
   composer_project install_dir do
-    vendor new_resource.package
+    package new_resource.package
+    version new_resource.version
     bin_dir bin_dir
     dev new_resource.dev
     quiet new_resource.quiet

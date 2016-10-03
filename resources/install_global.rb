@@ -9,6 +9,7 @@ actions :install, :update, :remove
 default_action :install
 
 attribute :package, :kind_of => String, :name_attribute => true, :required => true
+attribute :version, :kind_of => String, :default => '*.*.*'
 attribute :install_dir, :kind_of => String, :default => nil
 attribute :bin_dir, :kind_of => String, :default => nil
 attribute :dev, :kind_of => [TrueClass, FalseClass], :default => false
