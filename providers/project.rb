@@ -55,6 +55,7 @@ end
 def make_require
   dev = new_resource.dev ? '--dev' : '--update-no-dev'
   vendor = new_resource.vendor
+  raise 'vendor is needed for composer_project with action require' if vendor.nil?
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
 
   execute 'Install-composer-for-single-project' do
@@ -71,6 +72,7 @@ end
 
 def remove_vendor(cmd)
   vendor = new_resource.vendor
+  raise 'vendor is needed for composer_project with action require' if vendor.nil?
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
