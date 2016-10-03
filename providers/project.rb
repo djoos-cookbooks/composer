@@ -31,7 +31,7 @@ action :dump_autoload do
 end
 
 action :remove do
-  remove_vendor 'remove'
+  remove_package 'remove'
 end
 
 def make_execute(cmd)
@@ -54,32 +54,32 @@ end
 
 def make_require
   dev = new_resource.dev ? '--dev' : '--update-no-dev'
-  vendor = new_resource.vendor
-  raise 'vendor is needed for composer_project with action require' if vendor.nil?
+  package = new_resource.package
+  raise 'package is needed for composer_project with action require' if package.nil?
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
 
   execute 'Install-composer-for-single-project' do
     cwd new_resource.project_dir
-    command "#{node['composer']['bin']} require #{vendor} #{dev} #{prefer_dist}"
+    command "#{node['composer']['bin']} require #{package}#{new_resource.version} #{dev} #{prefer_dist}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
-    not_if "#{node['composer']['bin']} show #{vendor}"
+    not_if "#{node['composer']['bin']} show #{package}"
     user new_resource.user
     group new_resource.group
     umask new_resource.umask
   end
 end
 
-def remove_vendor(cmd)
-  vendor = new_resource.vendor
-  raise 'vendor is needed for composer_project with action require' if vendor.nil?
+def remove_package(cmd)
+  package = new_resource.package
+  raise 'package is needed for composer_project with action require' if package.nil?
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
-    command "#{node['composer']['bin']} remove #{vendor}"
+    command "#{node['composer']['bin']} remove #{package}#{new_resource.version}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
-    only_if "#{node['composer']['bin']} show #{vendor}"
+    only_if "#{node['composer']['bin']} show #{package}"
   end
 end
 
