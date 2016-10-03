@@ -30,7 +30,7 @@ action :dump_autoload do
   new_resource.updated_by_last_action(true)
 end
 
-action :remo§ do
+action :remove do
   remove_package 'remove'
 end
 
