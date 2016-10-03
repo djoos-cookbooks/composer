@@ -60,7 +60,7 @@ def make_require
 
   execute 'Install-composer-for-single-project' do
     cwd new_resource.project_dir
-    command "#{node['composer']['bin']} require #{package}#{new_resource.version} #{dev} #{prefer_dist}"
+    command "#{node['composer']['bin']} require #{package}:#{new_resource.version} #{dev} #{prefer_dist}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
     not_if "#{node['composer']['bin']} show #{package} #{new_resource.version}"
@@ -76,7 +76,7 @@ def remove_package(cmd)
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
-    command "#{node['composer']['bin']} remove #{package}#{new_resource.version}"
+    command "#{node['composer']['bin']} remove #{package}:#{new_resource.version}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
     only_if "#{node['composer']['bin']} show #{package} #{new_resource.version}"
