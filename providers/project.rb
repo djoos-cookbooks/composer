@@ -63,7 +63,7 @@ def make_require
     command "#{node['composer']['bin']} require #{package}#{new_resource.version} #{dev} #{prefer_dist}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
-    not_if "#{node['composer']['bin']} show #{package}"
+    not_if "#{node['composer']['bin']} show #{package} #{new_resource.version}"
     user new_resource.user
     group new_resource.group
     umask new_resource.umask
@@ -79,7 +79,7 @@ def remove_package(cmd)
     command "#{node['composer']['bin']} remove #{package}#{new_resource.version}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
-    only_if "#{node['composer']['bin']} show #{package}"
+    only_if "#{node['composer']['bin']} show #{package} #{new_resource.version}"
   end
 end
 
