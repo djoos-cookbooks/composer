@@ -49,10 +49,6 @@ def make_execute(cmd)
       'COMPOSER_BIN_DIR' => new_resource.bin_dir
     )
     action :run
-    not_if do
-        !new_resource.version.include?('*') &&
-        shell_out("cd #{new_resource.project_dir} && #{node['composer']['bin']} show #{package} #{new_resource.version}").exitstatus == 0
-      end
     user new_resource.user
     group new_resource.group
     umask new_resource.umask
