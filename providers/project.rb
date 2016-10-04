@@ -71,7 +71,7 @@ def make_require
     )
     action :run
     not_if do
-      !new_resource.version.include?('*') &&
+      !version.include?('*') &&
         shell_out("cd #{new_resource.project_dir} && #{node['composer']['bin']} show #{package} #{version}").exitstatus == 0
     end
     user new_resource.user
