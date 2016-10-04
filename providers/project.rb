@@ -57,6 +57,7 @@ def make_require
   package = new_resource.package
   raise 'package is needed for composer_project with action require' if package.nil?
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
+  version = new_resource.version ? new_resource.version : '*.*.*'
 
   execute 'Install-composer-for-single-project' do
     cwd new_resource.project_dir
@@ -65,7 +66,7 @@ def make_require
     action :run
     not_if do
       !new_resource.version.include?('*') &&
-        shell_out("cd #{new_resource.project_dir} && #{node['composer']['bin']} show #{package} #{new_resource.version}").exitstatus == 0
+        shell_out("cd #{new_resource.project_dir} && #{node['composer']['bin']} show #{package} #{version}").exitstatus == 0
     end
     user new_resource.user
     group new_resource.group
@@ -76,13 +77,14 @@ end
 def remove_package(cmd)
   package = new_resource.package
   raise 'package is needed for composer_project with action require' if package.nil?
+  version = new_resource.version ? new_resource.version : '*.*.*'
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} remove #{package}:#{new_resource.version}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
-    only_if "#{node['composer']['bin']} show #{package} #{new_resource.version}"
+    only_if "#{node['composer']['bin']} show #{package} #{version}"
   end
 end
 
