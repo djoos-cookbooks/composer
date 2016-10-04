@@ -81,7 +81,7 @@ def remove_package(cmd)
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
-    command "#{node['composer']['bin']} remove #{package}:#{new_resource.version}"
+    command "#{node['composer']['bin']} remove #{package}"
     environment 'COMPOSER_HOME' => Composer.home_dir(node)
     action :run
     only_if "#{node['composer']['bin']} show #{package} #{version}"
