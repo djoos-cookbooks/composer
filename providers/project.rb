@@ -44,7 +44,7 @@ def make_execute(cmd)
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist} #{prefer_source}"
-    environment 'COMPOSER_HOME' => Composer.home_dir(node)
+    environment 'COMPOSER_HOME' => Composer.home_dir(node) + ".composer/"
     action :run
     only_if 'which composer'
     user new_resource.user
@@ -61,7 +61,7 @@ def make_require
   execute 'Install-composer-for-single-project' do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} require #{vendor} #{dev} #{prefer_dist}"
-    environment 'COMPOSER_HOME' => Composer.home_dir(node)
+    environment 'COMPOSER_HOME' => Composer.home_dir(node) + ".composer/"
     action :run
     only_if 'which composer'
     user new_resource.user
@@ -76,7 +76,7 @@ def remove_vendor(cmd)
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} remove #{vendor}"
-    environment 'COMPOSER_HOME' => Composer.home_dir(node)
+    environment 'COMPOSER_HOME' => Composer.home_dir(node) + ".composer/"
     action :run
     only_if 'which composer'
   end
