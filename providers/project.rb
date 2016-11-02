@@ -58,13 +58,14 @@ end
 def make_require
   dev = new_resource.dev ? '--dev' : '--update-no-dev'
   package = new_resource.package
+  version = new_resource.version ? new_resource.version : '*.*.*'
+  package, version = vendor_package_identity(new_resource.vendor, package, version)
   raise 'package is needed for composer_project with action require' if package.nil?
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
-  version = new_resource.version ? new_resource.version : '*.*.*'
 
   execute 'Install-composer-for-single-project' do
     cwd new_resource.project_dir
-    command "#{node['composer']['bin']} require #{package}:#{new_resource.version} #{dev} #{prefer_dist}"
+    command "#{node['composer']['bin']} require #{package}:#{version} #{dev} #{prefer_dist}"
     environment(
       'COMPOSER_HOME' => Composer.home_dir(node),
       'COMPOSER_BIN_DIR' => new_resource.bin_dir
@@ -82,8 +83,9 @@ end
 
 def remove_package(cmd)
   package = new_resource.package
-  raise 'package is needed for composer_project with action require' if package.nil?
   version = new_resource.version ? new_resource.version : '*.*.*'
+  package, version = vendor_package_identity(new_resource.vendor, package, version)
+  raise 'package is needed for composer_project with action require' if package.nil?
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
@@ -99,4 +101,18 @@ end
 
 def optimize_flag(cmd)
   (%(install update).include? cmd) ? '--optimize-autoloader' : '--optimize'
+end
+
+def vendor_package_identity(vendor, package, version)
+  if (vendor.nil?)
+    return package, version
+  else
+    Chef::Log.warn("The vendor attribute is deprecated, please use package and version instead.")
+    vendor_split = vendor.split(':')
+    if vendor_split[1].nil?
+      return vendor_split[0], version
+    else
+      return vendor_split[0], vendor_split[1]
+    end
+  end
 end

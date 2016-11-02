@@ -9,6 +9,7 @@ actions :install, :single, :require, :update, :dump_autoload, :remove
 default_action :install
 
 attribute :project_dir, :kind_of => String, :name_attribute => true
+attribute :vendor, :kind_of => String, :default => nil
 attribute :package, :kind_of => String, :default => nil
 attribute :version, :kind_of => String, :default => nil
 attribute :dev, :kind_of => [TrueClass, FalseClass], :default => false
