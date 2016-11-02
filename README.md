@@ -43,21 +43,30 @@ This cookbook includes an LWRP for managing a Composer project
 ### `composer_project`
 
 #### Actions
-- :install: Reads the composer.json file from the current directory, resolves the dependencies, and installs them into vendor - this is the default action
-- :require Create composer.json file using specified vendor and downloads vendor.
+- :install: Reads the composer.json file from the current directory, resolves the dependencies, and installs them into project directory - this is the default action
+- :require Create composer.json file using specified package and version and installs it with the dependencies.
 - :update: Gets the latest versions of the dependencies and updates the composer.lock file
 - :dump_autoload: Updates the autoloader without having to go through an install or update (eg. because of new classes in a classmap package)
-- :remove Removes vendor from composer.json and uninstalls
+- :remove Removes package from composer.json and uninstalls
 
 #### Attribute parameters
-- project_dir: The directory where your project's composer.json can be found
+- project_dir: The directory where your project's composer.json can be found (name attribute)
+- package: The package to require or remove when using those actions
+- version: The version of the package to require or remove when using those actions, default *.*.* Be careful when uninstalling, the version has to match the installed package!
+- vendor: Can be used to combine package and version, deprecated!
 - dev: Install packages listed in require-dev, default false
 - quiet: Do not output any message, default true
 - optimize_autoloader: Optimize PSR0 packages to use classmaps, default false
+- prefer_dist: use the dist installation method
+- prefer_source: use the source installation method
+- bin_dir, overwrites the composer bin dir
+- user: the user to use when executing the composer commands
+- group: the group to use when executing the composer commands
+- umask: the umask to use when executing the composer commands
 
 #### Examples
 ```
-#install project vendors
+# Install the project dependencies
 composer_project "/path/to/project" do
     dev false
     quiet true
@@ -65,31 +74,33 @@ composer_project "/path/to/project" do
     action :install
 end
 
-#require project vendor
+# Require the package in the project dir
 composer_project "/path/to/project" do
+    package 'vendor/package'
+    version '*.*.*'
     dev false
     quiet true
     prefer_dist false
     action :require
 end
 
-#update project vendors
+# Update the project dependencies
 composer_project "/path/to/project" do
     dev false
     quiet true
     action :update
 end
 
-#dump-autoload for project
+# Dump-autoload in the project dir
 composer_project "/path/to/project" do
     dev false
     quiet true
     action :dump_autoload
 end
 
-#remove project vendor
+# Remove the package in the project dir
 composer_project "/path/to/project" do
-    vendor 'repo/vendor'
+    package 'vendor/package'
     action :remove
 end
 ```
