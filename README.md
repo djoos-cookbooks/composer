@@ -36,6 +36,8 @@ http://getcomposer.org/
 * `node['composer']['global_configs']` - Hash with global config options for users, eg. { "userX" => { "github-oauth" => { "github.com" => "userX_oauth_token" }, "vendor-dir" => "myvendordir" } } - default {}
 * `node['composer']['home_dir']` - COMPOSER_HOME, defaults to nil (in which case install_dir will be used), please do read the [Composer documentation on COMPOSER_HOME](https://getcomposer.org/doc/03-cli.md#composer-home) when setting a custom home_dir
 * `node['composer']['php_recipe']` - The php recipe to include, defaults to "php::default"
+* `node['composer']['global_install']['install_dir']` - The default location to install the packages in for composer_install_global
+* `node['composer']['global_install']['bin_dir']` - The default location to symlink the binaries when using composer_install_global
 
 ## Resources / Providers
 This cookbook includes an LWRP for managing a Composer project and one for a global installation of composer packages
