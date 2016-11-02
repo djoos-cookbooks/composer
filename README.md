@@ -38,7 +38,7 @@ http://getcomposer.org/
 * `node['composer']['php_recipe']` - The php recipe to include, defaults to "php::default"
 
 ## Resources / Providers
-This cookbook includes an LWRP for managing a Composer project
+This cookbook includes an LWRP for managing a Composer project and one for a global installation of composer packages
 
 ### `composer_project`
 
@@ -47,7 +47,7 @@ This cookbook includes an LWRP for managing a Composer project
 - :require Create composer.json file using specified package and version and installs it with the dependencies.
 - :update: Gets the latest versions of the dependencies and updates the composer.lock file
 - :dump_autoload: Updates the autoloader without having to go through an install or update (eg. because of new classes in a classmap package)
-- :remove Removes package from composer.json and uninstalls
+- :remove Removes package from composer.json and uninstalls it
 
 #### Attribute parameters
 - project_dir: The directory where your project's composer.json can be found (name attribute)
@@ -101,6 +101,43 @@ end
 # Remove the package in the project dir
 composer_project "/path/to/project" do
     package 'vendor/package'
+    action :remove
+end
+```
+
+### `composer_install_global`
+
+#### Actions
+- :install: Installs the package in the preferred global composer directory, putting binary symlinks in the preferred global binary directory (see attributes)
+- :update: Gets the latest versions of the dependencies and updates the composer.lock file for the globally installed composer packages
+- :remove Removes package from the global composer.json and uninstalls it
+
+#### Attribute parameters
+- package: The package to install or remove, name_attribute
+- version: The version of the package to install or remove when using those actions, default *.*.* Be careful when uninstalling, the version has to match the installed package!
+- install_dir: the directory in which to make the global installation, default: see the attributes
+- bin_dir: the directory in which to make the symlinks to the binaries, default: see the attributes
+- dev: Install packages listed in require-dev, default false
+- quiet: Do not output any message, default true
+- optimize_autoloader: Optimize PSR0 packages to use classmaps, default false
+- prefer_dist: use the dist installation method
+- prefer_source: use the source installation method
+
+#### Examples
+```
+# Install a package globally
+composer_install_global "package" do
+    version '~4.1'
+    action :install
+end
+
+# Update the package
+composer_install_global "package" do
+    action :update
+end
+
+# Remove the package from the global installation
+composer_install_global "package" do
     action :remove
 end
 ```
