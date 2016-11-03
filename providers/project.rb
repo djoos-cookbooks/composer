@@ -104,15 +104,19 @@ def optimize_flag(cmd)
 end
 
 def vendor_package_identity(vendor, package, version)
-  if (vendor.nil?)
-    return package, version
-  else
-    Chef::Log.warn("The vendor attribute is deprecated, please use package and version instead.")
+  unless vendor.nil?
+    # @todo take out deprecated vendor logic
+    Chef::Log.warn('The vendor attribute is deprecated, please use package and version instead.')
+
     vendor_split = vendor.split(':')
-    if vendor_split[1].nil?
-      return vendor_split[0], version
-    else
-      return vendor_split[0], vendor_split[1]
-    end
+    package = vendor_split[0]
+
+    version = if vendor_split[1].nil?
+                version
+              else
+                vendor_split[1]
+              end
+
+    return package, version
   end
 end
