@@ -116,7 +116,7 @@ def vendor_package_identity(vendor, package, version)
               else
                 vendor_split[1]
               end
-
-    return package, version
   end
+
+  [package, version]
 end
