@@ -118,5 +118,5 @@ def vendor_package_identity(vendor, package, version)
               end
   end
 
-  return package, version
+  [package, version]
 end
