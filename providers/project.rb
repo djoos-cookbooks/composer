@@ -73,7 +73,7 @@ def make_require
     action :run
     not_if do
       !version.include?('*') &&
-        shell_out("cd #{new_resource.project_dir} && #{node['composer']['bin']} show #{package} #{version}").exitstatus == 0
+        shell_out("cd #{new_resource.project_dir} && #{node['composer']['bin']} show #{package} #{version}").exitstatus.zero?
     end
     user new_resource.user
     group new_resource.group
