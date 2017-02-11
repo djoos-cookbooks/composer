@@ -100,7 +100,7 @@ def remove_package(cmd)
 end
 
 def optimize_flag(cmd)
-  (%(install update).include? cmd) ? '--optimize-autoloader' : '--optimize'
+  %(install update).include?(cmd) ? '--optimize-autoloader' : '--optimize'
 end
 
 def vendor_package_identity(vendor, package, version)
