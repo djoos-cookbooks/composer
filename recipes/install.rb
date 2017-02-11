@@ -29,6 +29,7 @@ else
 
   remote_file file do
     source node['composer']['url']
+    checksum node['composer']['checksum']
     mode node['composer']['mask']
     action :create
     not_if { ::File.exist?(file) }
