@@ -40,14 +40,15 @@ def make_execute(cmd)
   optimize = new_resource.optimize_autoloader ? optimize_flag(cmd) : ''
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
   prefer_source = new_resource.prefer_source ? '--prefer-source' : ''
+  environment = {
+      :COMPOSER_HOME => Composer.home_dir(node),
+      :COMPOSER_BIN_DIR => new_resource.bin_dir
+  }
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} #{cmd} --no-interaction --no-ansi #{quiet} #{dev} #{optimize} #{prefer_dist} #{prefer_source}"
-    environment(
-      'COMPOSER_HOME' => Composer.home_dir(node),
-      'COMPOSER_BIN_DIR' => new_resource.bin_dir
-    )
+    environment(environment.merge(new_resource.environment))
     action :run
     user new_resource.user
     group new_resource.group
@@ -62,14 +63,15 @@ def make_require
   package, version = vendor_package_identity(new_resource.vendor, package, version)
   raise 'package is needed for composer_project with action require' if package.nil?
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
+  environment = {
+      :COMPOSER_HOME => Composer.home_dir(node),
+      :COMPOSER_BIN_DIR => new_resource.bin_dir
+  }
 
   execute 'Install-composer-for-single-project' do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} require #{package}:#{version} #{dev} #{prefer_dist}"
-    environment(
-      'COMPOSER_HOME' => Composer.home_dir(node),
-      'COMPOSER_BIN_DIR' => new_resource.bin_dir
-    )
+    environment(environment.merge(new_resource.environment))
     action :run
     not_if do
       !version.include?('*') &&
@@ -86,14 +88,15 @@ def remove_package(cmd)
   version = new_resource.version ? new_resource.version : '*.*.*'
   package, version = vendor_package_identity(new_resource.vendor, package, version)
   raise 'package is needed for composer_project with action require' if package.nil?
+  environment = {
+      :COMPOSER_HOME => Composer.home_dir(node),
+      :COMPOSER_BIN_DIR => new_resource.bin_dir
+  }
 
   execute "#{cmd}-composer-for-project" do
     cwd new_resource.project_dir
     command "#{node['composer']['bin']} remove #{package}"
-    environment(
-      'COMPOSER_HOME' => Composer.home_dir(node),
-      'COMPOSER_BIN_DIR' => new_resource.bin_dir
-    )
+    environment(environment.merge(new_resource.environment))
     action :run
     only_if "#{node['composer']['bin']} show #{package} #{version}"
   end
