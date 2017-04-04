@@ -20,7 +20,8 @@ attribute :prefer_source, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :bin_dir, :kind_of => String, :default => 'vendor/bin'
 attribute :user, :kind_of => String, :default => 'root'
 attribute :group, :kind_of => String, :default => 'root'
-attribute :umask, :kind_of => [String, Integer], :default => '002'
+attribute :umask, :kind_of => [String, Integer], :default => '0002'
+attribute :environment, :kind_of => Hash, :default => nil
 
 def initialize(*args)
   super
