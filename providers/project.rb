@@ -41,8 +41,8 @@ def make_execute(cmd)
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
   prefer_source = new_resource.prefer_source ? '--prefer-source' : ''
   environment = {
-      :COMPOSER_HOME => Composer.home_dir(node),
-      :COMPOSER_BIN_DIR => new_resource.bin_dir
+    :COMPOSER_HOME => Composer.home_dir(node),
+    :COMPOSER_BIN_DIR => new_resource.bin_dir
   }
 
   execute "#{cmd}-composer-for-project" do
@@ -64,8 +64,8 @@ def make_require
   raise 'package is needed for composer_project with action require' if package.nil?
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
   environment = {
-      :COMPOSER_HOME => Composer.home_dir(node),
-      :COMPOSER_BIN_DIR => new_resource.bin_dir
+    :COMPOSER_HOME => Composer.home_dir(node),
+    :COMPOSER_BIN_DIR => new_resource.bin_dir
   }
 
   execute 'Install-composer-for-single-project' do
@@ -75,7 +75,7 @@ def make_require
     action :run
     not_if do
       !version.include?('*') &&
-        shell_out("cd #{new_resource.project_dir} && #{node['composer']['bin']} show #{package} #{version}").exitstatus == 0
+        shell_out("cd #{new_resource.project_dir} && #{node['composer']['bin']} show #{package} #{version}").exitstatus.zero?
     end
     user new_resource.user
     group new_resource.group
@@ -89,8 +89,8 @@ def remove_package(cmd)
   package, version = vendor_package_identity(new_resource.vendor, package, version)
   raise 'package is needed for composer_project with action require' if package.nil?
   environment = {
-      :COMPOSER_HOME => Composer.home_dir(node),
-      :COMPOSER_BIN_DIR => new_resource.bin_dir
+    :COMPOSER_HOME => Composer.home_dir(node),
+    :COMPOSER_BIN_DIR => new_resource.bin_dir
   }
 
   execute "#{cmd}-composer-for-project" do
@@ -103,7 +103,7 @@ def remove_package(cmd)
 end
 
 def optimize_flag(cmd)
-  (%(install update).include? cmd) ? '--optimize-autoloader' : '--optimize'
+  %(install update).include?(cmd) ? '--optimize-autoloader' : '--optimize'
 end
 
 def vendor_package_identity(vendor, package, version)

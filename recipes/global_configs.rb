@@ -14,7 +14,7 @@ unless configs.nil?
     directory user_composer_dir do
       owner user
       group user
-      mode 0755
+      mode '0755'
       action :create
     end
 
