@@ -5,7 +5,10 @@ Encoding:
   Enabled: false
 
 LineLength:
-  Max: 200
+  Max: 225
+
+BlockLength:
+  Max: 35
 
 HashSyntax:
   EnforcedStyle: hash_rockets
@@ -21,4 +24,3 @@ MethodLength:
 
 AbcSize:
   Enabled: false
-  
