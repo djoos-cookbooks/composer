@@ -5,7 +5,7 @@ Encoding:
   Enabled: false
 
 LineLength:
-  Max: 225
+  Max: 200
 
 BlockLength:
   Max: 35
