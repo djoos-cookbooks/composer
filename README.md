@@ -65,6 +65,7 @@ This cookbook includes an LWRP for managing a Composer project and one for a glo
 - user: the user to use when executing the composer commands
 - group: the group to use when executing the composer commands
 - umask: the umask to use when executing the composer commands
+- environment: A hash of environment variables that will be available when running composer
 
 #### Examples
 ```

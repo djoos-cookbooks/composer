@@ -21,6 +21,7 @@ attribute :bin_dir, :kind_of => String, :default => 'vendor/bin'
 attribute :user, :kind_of => String, :default => 'root'
 attribute :group, :kind_of => String, :default => 'root'
 attribute :umask, :kind_of => [String, Fixnum], :default => 0002
+attribute :environment, :kind_of => Hash, :default => nil
 
 def initialize(*args)
   super
