@@ -32,6 +32,6 @@ else
     checksum node['composer']['checksum']
     mode node['composer']['mask']
     action :create
-    not_if { ::File.exist?(file) }
+    not_if "[[ $(#{file} --version | grep #{node['composer']['version']} | wc -l) -eq 1 ]]"
   end
 end
