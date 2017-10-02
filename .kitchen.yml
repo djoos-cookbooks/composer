@@ -8,14 +8,44 @@ provisioner:
     ssl_verify_mode: verify_peer
 
 platforms:
-  - name: ubuntu-12.04
+  - name: ubuntu-14.04-chef-12
     run_list:
       - recipe[apt]
-
-  - name: ubuntu-14.04
+    driver:
+      box: bento/ubuntu-14.04
+    provisioner:
+      require_chef_omnibus: 12
+  - name: ubuntu-14.04-chef-13
     run_list:
       - recipe[apt]
-  - name: centos-7.2
+    driver:
+      box: bento/ubuntu-14.04
+    provisioner:
+      require_chef_omnibus: 13
+  - name: ubuntu-16.04-chef-12
+    run_list:
+      - recipe[apt]
+    driver:
+      box: bento/ubuntu-16.04
+    provisioner:
+      require_chef_omnibus: 12
+  - name: ubuntu-16.04-chef-13
+    run_list:
+      - recipe[apt]
+    driver:
+      box: bento/ubuntu-16.04
+    provisioner:
+      require_chef_omnibus: 13
+  - name: centos-7.3-chef-12
+    driver:
+      box: bento/centos-7.3
+    provisioner:
+      require_chef_omnibus: 12
+  - name: centos-7.3-chef-13
+    driver:
+      box: bento/centos-7.3
+    provisioner:
+      require_chef_omnibus: 13
 
 suites:
   - name: default
