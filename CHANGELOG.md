@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the mysql cookbook.
 
+## 2.6.1 (2017-06-22)
+
+- Fixed correct default for environment attribute: Hash instead of nil
+
 ## 2.6.0 (2017-04-13)
 
 - Fix Travis tests
