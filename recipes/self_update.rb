@@ -7,10 +7,10 @@
 
 include_recipe 'composer::install'
 
-channel = if node['composer']['selfupdate_channel'].nil?
+channel = if node['composer']['self_update_channel'].nil?
             ''
           else
-            " --#{node['composer']['selfupdate_channel']}"
+            " --#{node['composer']['self_update_channel']}"
           end
 
 execute 'composer-self_update' do
