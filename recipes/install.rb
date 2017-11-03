@@ -10,9 +10,9 @@ include_recipe node['composer']['php_recipe']
 if node['platform'] == 'windows'
   windows_package 'Composer - PHP Dependency Manager' do
     source node['composer']['url']
-    options %w(
+    options %w[
       /VERYSILENT
-    ).join(' ')
+    ].join(' ')
   end
 
   install_dir = "#{node['composer']['install_dir'].tr('/', '\\')}\\bin"

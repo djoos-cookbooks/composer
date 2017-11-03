@@ -22,8 +22,3 @@ attribute :user, :kind_of => String, :default => 'root'
 attribute :group, :kind_of => String, :default => 'root'
 attribute :umask, :kind_of => [String, Integer], :default => '0002'
 attribute :environment, :kind_of => Hash, :default => {}
-
-def initialize(*args)
-  super
-  @action = :install
-end

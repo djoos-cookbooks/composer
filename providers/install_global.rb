@@ -13,17 +13,14 @@ end
 
 action :install do
   install_global_install
-  new_resource.updated_by_last_action(true)
 end
 
 action :remove do
   install_global_remove
-  new_resource.updated_by_last_action(true)
 end
 
 action :update do
   install_global_update
-  new_resource.updated_by_last_action(true)
 end
 
 def install_global_install

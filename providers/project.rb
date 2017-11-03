@@ -13,7 +13,6 @@ end
 
 action :install do
   make_execute 'install'
-  new_resource.updated_by_last_action(true)
 end
 
 action :require do
@@ -22,12 +21,10 @@ end
 
 action :update do
   make_execute 'update'
-  new_resource.updated_by_last_action(true)
 end
 
 action :dump_autoload do
   make_execute 'dump-autoload'
-  new_resource.updated_by_last_action(true)
 end
 
 action :remove do

@@ -159,7 +159,7 @@ end
 ## License and Authors
 
 Author: David Joos <development@davidjoos.com>
-Copyright: 2016, David Joos
+Copyright: 2016-2017, David Joos
 
 Author: David Joos <david.joos@escapestudios.com>
 Author: Escape Studios Development <dev@escapestudios.com>
