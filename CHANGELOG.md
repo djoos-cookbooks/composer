@@ -1,6 +1,6 @@
-# mysql Cookbook CHANGELOG
+# composer cookbook CHANGELOG
 
-This file is used to list changes made in each version of the mysql cookbook.
+This file is used to list changes made in each version (>= 2.4.0) of the composer cookbook.
 
 ## 2.6.1 (2017-06-22)
 
@@ -26,7 +26,3 @@ This file is used to list changes made in each version of the mysql cookbook.
 ## 2.4.0 (2016-08-24)
 
 - Refactored the cookbook
-
-## 2.3.0 and older
-
-- See [Github history](https://github.com/djoos-cookbooks/composer/commits/master)
