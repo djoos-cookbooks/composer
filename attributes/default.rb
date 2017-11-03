@@ -14,7 +14,9 @@ if node['platform'] == 'windows'
   default['composer']['global_install']['install_dir'] = 'C:\\Program\ Files\\Composer'
   default['composer']['global_install']['bin_dir'] = 'C:\\ProgramData\\Composer'
 else
-  default['composer']['url'] = 'http://getcomposer.org/composer.phar'
+  default['composer']['version'] = '1.4.1'
+  default['composer']['url'] = "https://getcomposer.org/download/#{node['composer']['version']}/composer.phar"
+  default['composer']['checksum'] = 'abd277cc3453be980bb48cbffe9d1f7422ca1ef4bc0b7d035fda87cea4d55cbc'
   default['composer']['install_dir'] = '/usr/local/bin'
   default['composer']['bin'] = "#{node['composer']['install_dir']}/composer"
   default['composer']['install_globally'] = true
