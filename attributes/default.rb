@@ -1,13 +1,13 @@
 #
-# Cookbook Name:: composer
+# Cookbook:: composer
 # Attributes:: default
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: 2016-2021, David Joos
 #
 
 include_attribute 'php'
 
-if node['platform'] == 'windows'
+if platform?('windows')
   default['composer']['url'] = 'https://getcomposer.org/Composer-Setup.exe'
   default['composer']['install_dir'] = 'C:\\ProgramData\\ComposerSetup'
   default['composer']['bin'] = "#{node['composer']['install_dir']}\\composer.bat"

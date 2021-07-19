@@ -1,26 +1,6 @@
-AlignParameters:
-  Enabled: false
-
-Encoding:
-  Enabled: false
-
-LineLength:
-  Max: 200
-
-BlockLength:
-  Max: 35
-
-HashSyntax:
-  EnforcedStyle: hash_rockets
-
-RedundantBegin:
-  Enabled: false
-
-UselessAssignment:
-  Enabled: false
-
-MethodLength:
-  Enabled: false
-
-AbcSize:
-  Enabled: false
+AllCops:
+  TargetChefVersion: 17.latest
+Chef/Modernize/FoodcriticComments:
+  Enabled: true
+Chef/Style/CopyrightCommentFormat:
+  Enabled: true

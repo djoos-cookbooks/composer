@@ -1,15 +1,9 @@
 #
-# Cookbook Name:: composer
+# Cookbook:: composer
 # Resource:: install_global
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright:: 2012-2021, Escape Studios
 #
-
-use_inline_resources if defined?(use_inline_resources)
-
-def whyrun_supported?
-  true
-end
 
 action :install do
   install_global_install
@@ -24,8 +18,8 @@ action :update do
 end
 
 def install_global_install
-  install_dir = new_resource.install_dir ? new_resource.install_dir : node['composer']['global_install']['install_dir']
-  bin_dir = new_resource.bin_dir ? new_resource.bin_dir : node['composer']['global_install']['bin_dir']
+  install_dir = new_resource.install_dir || node['composer']['global_install']['install_dir']
+  bin_dir = new_resource.bin_dir || node['composer']['global_install']['bin_dir']
   directory install_dir
 
   composer_project install_dir do
@@ -42,7 +36,7 @@ def install_global_install
 end
 
 def install_global_remove
-  install_dir = new_resource.install_dir ? new_resource.install_dir : node['composer']['global_install']['install_dir']
+  install_dir = new_resource.install_dir || node['composer']['global_install']['install_dir']
 
   composer_project install_dir do
     package new_resource.package
@@ -58,8 +52,8 @@ def install_global_remove
 end
 
 def install_global_update
-  install_dir = new_resource.install_dir ? new_resource.install_dir : node['composer']['global_install']['install_dir']
-  bin_dir = new_resource.bin_dir ? new_resource.bin_dir : node['composer']['global_install']['bin_dir']
+  install_dir = new_resource.install_dir || node['composer']['global_install']['install_dir']
+  bin_dir = new_resource.bin_dir || node['composer']['global_install']['bin_dir']
 
   composer_project install_dir do
     package new_resource.package

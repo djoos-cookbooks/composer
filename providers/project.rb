@@ -1,15 +1,9 @@
 #
-# Cookbook Name:: composer
+# Cookbook:: composer
 # Resource:: project
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: 2016-2021, David Joos
 #
-
-use_inline_resources if defined?(use_inline_resources)
-
-def whyrun_supported?
-  true
-end
 
 action :install do
   make_execute 'install'
@@ -38,8 +32,8 @@ def make_execute(cmd)
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
   prefer_source = new_resource.prefer_source ? '--prefer-source' : ''
   environment = {
-    :COMPOSER_HOME => Composer.home_dir(node),
-    :COMPOSER_BIN_DIR => new_resource.bin_dir
+    COMPOSER_HOME: Composer.home_dir(node),
+    COMPOSER_BIN_DIR: new_resource.bin_dir,
   }
 
   execute "#{cmd}-composer-for-project" do
@@ -56,13 +50,13 @@ end
 def make_require
   dev = new_resource.dev ? '--dev' : '--update-no-dev'
   package = new_resource.package
-  version = new_resource.version ? new_resource.version : '*.*.*'
+  version = new_resource.version || '*.*.*'
   package, version = vendor_package_identity(new_resource.vendor, package, version)
   raise 'package is needed for composer_project with action require' if package.nil?
   prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
   environment = {
-    :COMPOSER_HOME => Composer.home_dir(node),
-    :COMPOSER_BIN_DIR => new_resource.bin_dir
+    COMPOSER_HOME: Composer.home_dir(node),
+    COMPOSER_BIN_DIR: new_resource.bin_dir,
   }
 
   execute 'Install-composer-for-single-project' do
@@ -82,12 +76,12 @@ end
 
 def remove_package(cmd)
   package = new_resource.package
-  version = new_resource.version ? new_resource.version : '*.*.*'
+  version = new_resource.version || '*.*.*'
   package, version = vendor_package_identity(new_resource.vendor, package, version)
   raise 'package is needed for composer_project with action require' if package.nil?
   environment = {
-    :COMPOSER_HOME => Composer.home_dir(node),
-    :COMPOSER_BIN_DIR => new_resource.bin_dir
+    COMPOSER_HOME: Composer.home_dir(node),
+    COMPOSER_BIN_DIR: new_resource.bin_dir,
   }
 
   execute "#{cmd}-composer-for-project" do

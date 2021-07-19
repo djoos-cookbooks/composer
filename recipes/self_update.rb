@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: composer
+# Cookbook:: composer
 # Recipe:: self_update
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: 2016-2021, David Joos
 #
 
 include_recipe 'composer::install'
