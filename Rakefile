@@ -196,19 +196,12 @@ module KnifeCommands
   end
 end
 
-namespace :style do
-  require 'rubocop/rake_task'
-  require 'foodcritic'
-
-  desc 'Run Ruby style checks (RuboCop)'
-  RuboCop::RakeTask.new(:ruby)
-
-  desc 'Run Chef style checks (FoodCritic)'
-  FoodCritic::Rake::LintTask.new(:chef)
+require 'cookstyle'
+require 'rubocop/rake_task'
+desc 'Run Linter (cookstyle) tests'
+RuboCop::RakeTask.new(:style) do |task|
+  task.options << '--display-cop-names'
 end
-
-desc 'Run all syntax/lint checks'
-task style: ['style:ruby', 'style:chef']
 
 desc 'Run ChefSpec tests'
 RSpec::Core::RakeTask.new(:spec)
