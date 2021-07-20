@@ -51,7 +51,7 @@ action_class do
     prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
     prefer_source = new_resource.prefer_source ? '--prefer-source' : ''
     environment = {
-      COMPOSER_HOME: Composer.home_dir(node),
+      COMPOSER_HOME: composer_home_dir(node),
       COMPOSER_BIN_DIR: new_resource.bin_dir,
     }
 
@@ -74,7 +74,7 @@ action_class do
     raise 'package is needed for composer_project with action require' if package.nil?
     prefer_dist = new_resource.prefer_dist ? '--prefer-dist' : ''
     environment = {
-      COMPOSER_HOME: Composer.home_dir(node),
+      COMPOSER_HOME: composer_home_dir(node),
       COMPOSER_BIN_DIR: new_resource.bin_dir,
     }
 
@@ -99,7 +99,7 @@ action_class do
     package, version = vendor_package_identity(new_resource.vendor, package, version)
     raise 'package is needed for composer_project with action require' if package.nil?
     environment = {
-      COMPOSER_HOME: Composer.home_dir(node),
+      COMPOSER_HOME: composer_home_dir(node),
       COMPOSER_BIN_DIR: new_resource.bin_dir,
     }
 

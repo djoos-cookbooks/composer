@@ -8,6 +8,8 @@ This file is used to list changes made in each version (>= 2.4.0) of the compose
 - Remove deprecated foodcritic tool
 - Apply Cookstyle fixes
 - Convert legacy LWRP structure to custom resource syntax
+- Update Kitchen config to Inspec and current platforms
+- Update Travis CI to latest Chef Workstation
 
 ## 2.6.1 (2017-06-22)
 

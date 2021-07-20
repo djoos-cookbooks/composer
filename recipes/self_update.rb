@@ -16,7 +16,7 @@ channel = if node['composer']['self_update_channel'].nil?
 execute 'composer-self_update' do
   cwd node['composer']['install_dir']
   command 'composer self-update' + channel
-  environment 'COMPOSER_HOME' => Composer.home_dir(node)
+  environment 'COMPOSER_HOME' => composer_home_dir(node)
   action :run
   ignore_failure true
 end
