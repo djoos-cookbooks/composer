@@ -1,10 +1,10 @@
-name 'composer'
-maintainer 'David Joos'
+name             'composer'
+maintainer       'David Joos'
 maintainer_email 'development@davidjoos.com'
-license 'MIT'
-description 'Installs/Configures Composer'
-version '2.7.0'
-chef_version '>= 0.10.0'
+license          'MIT'
+description      'Installs/Configures Composer'
+version          '2.7.0'
+chef_version     '>= 15.3'
 
 %w(debian ubuntu redhat centos fedora scientific amazon windows).each do |os|
   supports os

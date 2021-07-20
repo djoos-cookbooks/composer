@@ -5,6 +5,7 @@
 # Copyright:: 2016-2021, David Joos
 #
 
+unified_mode true
 default_action :install
 
 property :project_dir, String, name_property: true

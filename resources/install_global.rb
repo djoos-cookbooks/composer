@@ -5,6 +5,7 @@
 # Copyright:: 2012-2021, Escape Studios
 #
 
+unified_mode true
 default_action :install
 
 property :package, String, name_property: true
