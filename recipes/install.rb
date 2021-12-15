@@ -1,18 +1,18 @@
 #
-# Cookbook Name:: composer
+# Cookbook:: composer
 # Recipe:: install
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: 2016-2021, David Joos
 #
 
 include_recipe node['composer']['php_recipe']
 
-if node['platform'] == 'windows'
+if platform?('windows')
   windows_package 'Composer - PHP Dependency Manager' do
     source node['composer']['url']
-    options %w[
+    options %w(
       /VERYSILENT
-    ].join(' ')
+    ).join(' ')
   end
 
   install_dir = "#{node['composer']['install_dir'].tr('/', '\\')}\\bin"

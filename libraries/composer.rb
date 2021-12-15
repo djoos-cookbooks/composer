@@ -1,10 +1,16 @@
-# Composer module
 module Composer
-  def self.install_dir(node)
-    node['composer']['install_dir']
-  end
+  module Cookbook
+    module Helpers
+      def composer_install_dir(node)
+        node['composer']['install_dir']
+      end
 
-  def self.home_dir(node)
-    node['composer']['home_dir'] || install_dir(node)
+      def composer_home_dir(node)
+        node['composer']['home_dir'] || install_dir(node)
+      end
+    end
   end
 end
+
+Chef::DSL::Recipe.include ::Composer::Cookbook::Helpers
+Chef::Resource.include ::Composer::Cookbook::Helpers

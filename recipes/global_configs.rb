@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: composer
+# Cookbook:: composer
 # Recipe:: global_configs
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: 2016-2021, David Joos
 #
 
 configs = node['composer']['global_configs']
