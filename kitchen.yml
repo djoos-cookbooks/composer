@@ -4,7 +4,7 @@ driver:
 
 provisioner:
   name: chef_zero
-  product_name: chef
+  product_name: cinc
   chef_license: accept-no-persist
   enforce_idempotency: true
   multiple_converge: 2
@@ -15,8 +15,9 @@ verifier:
 
 platforms:
   - name: centos-7
-  - name: centos-8
+  - name: centos_stream-8
   - name: debian-10
+  - name: debian-11
   - name: ubuntu-18.04
   - name: ubuntu-20.04
 
