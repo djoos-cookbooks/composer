@@ -3,8 +3,8 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_zero
-  product_name: cinc
+  name: chef_infra
+  product_name: chef
   chef_license: accept-no-persist
   enforce_idempotency: true
   multiple_converge: 2
@@ -14,8 +14,8 @@ verifier:
   name: inspec
 
 platforms:
-  - name: centos-7
   - name: centos_stream-8
+  - name: centos-7
   - name: debian-10
   - name: debian-11
   - name: ubuntu-18.04
@@ -24,6 +24,7 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[php::default]
       - recipe[composer::default]
     attributes:
       composer:

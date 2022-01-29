@@ -4,6 +4,7 @@ describe 'composer::default' do
   platform 'ubuntu'
 
   before do
+    stub_command('php --version')
     stub_command("php -m | grep 'Phar'").and_return(true)
   end
 

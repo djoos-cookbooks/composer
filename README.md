@@ -8,9 +8,11 @@ More information available at <http://getcomposer.org/>.
 
 ## Requirements
 
+⚠ This cookbook does not install PHP! Please make sure PHP is installed before this cookbook is included, e.g. by using the [`php` cookbook](https://github.com/sous-chefs/php).
+
 ### Cookbooks:
 
-- php
+No dependencies.
 
 ### Platforms:
 
@@ -31,40 +33,43 @@ More information available at <http://getcomposer.org/>.
 - `node['composer']['link_type']` - link type for composer.phar link - default `:symbolic`
 - `node['composer']['global_configs']` - Hash with global config options for users, eg. `{ "userX" => { "github-oauth" => { "github.com" => "userX_oauth_token" }, "vendor-dir" => "myvendordir" } }` - default `{}`
 - `node['composer']['home_dir']` - COMPOSER_HOME, defaults to nil (in which case install_dir will be used), please do read the [Composer documentation on COMPOSER_HOME](https://getcomposer.org/doc/03-cli.md#composer-home) when setting a custom home_dir
-- `node['composer']['php_recipe']` - The php recipe to include, defaults to `php::default`
 - `node['composer']['global_install']['install_dir']` - The default location to install the packages in for `composer_install_global`
 - `node['composer']['global_install']['bin_dir']` - The default location to symlink the binaries when using `composer_install_global`
 
-## Resources / Providers
+## Resources
 
-This cookbook includes resources for managing a Composer project locally and installing Composer packages globally
+This cookbook includes resources for managing a Composer project and for installing Composer packages globally:
 
 ### `composer_project`
 
 #### Actions
 
-- `:install`: Reads the composer.json file from the current directory, resolves the dependencies, and installs them into project directory - this is the default action
-- `:require`: Create composer.json file using specified package and version and installs it with the dependencies.
-- `:update`: Gets the latest versions of the dependencies and updates the composer.lock file
-- `:dump_autoload`: Updates the autoloader without having to go through an install or update (eg. because of new classes in a classmap package)
-- `:remove`: Removes package from composer.json and uninstalls it
+| Action           | Description                                                                                                                                               |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `:install`       | Reads the composer.json file from the current directory, resolves the dependencies, and installs them into project directory - this is the default action |
+| `:require`       | Create composer.json file using specified package and version and installs it with the dependencies.                                                      |
+| `:update`        | Gets the latest versions of the dependencies and updates the composer.lock file                                                                           |
+| `:dump_autoload` | Updates the autoloader without having to go through an install or update (eg. because of new classes in a classmap package)                               |
+| `:remove`        | Removes package from composer.json and uninstalls it                                                                                                      |
 
-#### Attribute parameters
+#### Properties
 
-- `project_dir`: The directory where your project's composer.json can be found (name attribute)
-- `package`: The package to require or remove when using those actions
-- `version`: The version of the package to require or remove when using those actions, default `*.*.*` Be careful when uninstalling, the version has to match the installed package!
-- `vendor`: Can be used to combine package and version, deprecated!
-- `dev`: Install packages listed in require-dev, default `false`
-- `quiet`: Do not output any message, default `true`
-- `optimize_autoloader`: Optimize PSR0 packages to use classmaps, default `false`
-- `prefer_dist`: use the dist installation method
-- `prefer_source`: use the source installation method
-- `bin_dir`:, overwrites the composer bin dir
-- `user`: the user to use when executing the composer commands
-- `group`: the group to use when executing the composer commands
-- `umask`: the umask to use when executing the composer commands
-- `environment`: A hash of environment variables that will be available when running composer
+| Name                  | Description                                                                                                                                                              |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `project_dir`         | The directory where your project's composer.json can be found (name attribute)                                                                                           |
+| `package`             | The package to require or remove when using those actions                                                                                                                |
+| `version`             | The version of the package to require or remove when using those actions, default `*.*.*`. Be careful when uninstalling, the version has to match the installed package! |
+| `vendor`              | Can be used to combine package and version, deprecated!                                                                                                                  |
+| `dev`                 | Install packages listed in require-dev, default `false`                                                                                                                  |
+| `quiet`               | Do not output any message, default `true`                                                                                                                                |
+| `optimize_autoloader` | Optimize PSR0 packages to use classmaps, default `false`                                                                                                                 |
+| `prefer_dist`         | use the dist installation method                                                                                                                                         |
+| `prefer_source`       | use the source installation method                                                                                                                                       |
+| `bin_dir`             | overwrites the composer bin dir                                                                                                                                          |
+| `user`                | the user to use when executing the composer commands                                                                                                                     |
+| `group`               | the group to use when executing the composer commands                                                                                                                    |
+| `umask`               | the umask to use when executing the composer commands                                                                                                                    |
+| `environment`         | A hash of environment variables that will be available when running composer                                                                                             |
 
 #### Examples
 
@@ -112,21 +117,25 @@ end
 
 #### Actions
 
-- `:install`: Installs the package in the preferred global composer directory, putting binary symlinks in the preferred global binary directory (see attributes)
-- `:update`: Gets the latest versions of the dependencies and updates the composer.lock file for the globally installed composer packages
-- `:remove`: Removes package from the global composer.json and uninstalls it
+| Action     | Description                                                                                                                                        |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `:install` | Installs the package in the preferred global composer directory, putting binary symlinks in the preferred global binary directory (see attributes) |
+| `:update`  | Gets the latest versions of the dependencies and updates the composer.lock file for the globally installed composer packages                       |
+| `:remove`  | Removes package from the global composer.json and uninstalls it                                                                                    |
 
 #### Attribute parameters
 
-- `package`: The package to install or remove, name_attribute
-- `version`: The version of the package to install or remove when using those actions, default *.*.* Be careful when uninstalling, the version has to match the installed package!
-- `install_dir`: the directory in which to make the global installation, default: see the attributes
-- `bin_dir`: the directory in which to make the symlinks to the binaries, default: see the attributes
-- `dev`: Install packages listed in require-dev, default false
-- `quiet`: Do not output any message, default true
-- `optimize_autoloader`: Optimize PSR0 packages to use classmaps, default false
-- `prefer_dist`: use the dist installation method
-- `prefer_source`: use the source installation method
+| Property              | Description                                                                                                                                                              |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `package`             | The package to install or remove, name_attribute                                                                                                                         |
+| `version`             | The version of the package to install or remove when using those actions, default `*.*.*`. Be careful when uninstalling, the version has to match the installed package! |
+| `install_dir`         | the directory in which to make the global installation, default: see the attributes                                                                                      |
+| `bin_dir`             | the directory in which to make the symlinks to the binaries, default: see the attributes                                                                                 |
+| `dev`                 | Install packages listed in require-dev, default `false`                                                                                                                  |
+| `quiet`               | Do not output any message, default `true`                                                                                                                                |
+| `optimize_autoloader` | Optimize PSR0 packages to use classmaps, default `false`                                                                                                                 |
+| `prefer_dist`         | use the dist installation method                                                                                                                                         |
+| `prefer_source`       | use the source installation method                                                                                                                                       |
 
 #### Examples
 
@@ -150,10 +159,10 @@ end
 
 ## Usage
 
-1. include `recipe[composer]` in a run list
-2. tweak the attributes via attributes/default.rb
---- OR ---
-[override the attribute on a higher level](http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+1. Make sure PHP is installed (e.g. include the `php::default` recipe)
+2. Set custom values for any attributes in a wrapper recipe / node data
+3. Include `composer::default` in your wrapper recipe / run list
+4. Use `composer_project` and `composer_install_global` in your recipes
 
 ## References
 

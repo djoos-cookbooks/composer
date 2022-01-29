@@ -5,7 +5,11 @@
 # Copyright:: 2016-2022, David Joos
 #
 
-include_recipe node['composer']['php_recipe']
+log 'php check' do
+  level :fatal
+  message 'PHP is not installed. Please install PHP before including this recipe (e.g. with the `php` cookbook)'
+  not_if 'php --version'
+end
 
 if platform?('windows')
   windows_package 'Composer - PHP Dependency Manager' do

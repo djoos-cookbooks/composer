@@ -12,5 +12,3 @@ end
 
 source_url 'https://github.com/djoos-cookbooks/composer'
 issues_url 'https://github.com/djoos-cookbooks/composer/issues'
-
-depends 'php'

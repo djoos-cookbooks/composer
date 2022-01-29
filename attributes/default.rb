@@ -5,8 +5,6 @@
 # Copyright:: 2016-2022, David Joos
 #
 
-include_attribute 'php'
-
 if platform?('windows')
   default['composer']['url'] = 'https://getcomposer.org/Composer-Setup.exe'
   default['composer']['install_dir'] = 'C:\\ProgramData\\ComposerSetup'
@@ -26,5 +24,4 @@ end
 
 default['composer']['global_configs'] = {}
 default['composer']['home_dir'] = nil
-default['composer']['php_recipe'] = 'php::default'
 default['composer']['self_update_channel'] = nil
