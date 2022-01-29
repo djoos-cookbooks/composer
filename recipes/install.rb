@@ -2,7 +2,7 @@
 # Cookbook:: composer
 # Recipe:: install
 #
-# Copyright:: 2016-2021, David Joos
+# Copyright:: 2016-2022, David Joos
 #
 
 include_recipe node['composer']['php_recipe']

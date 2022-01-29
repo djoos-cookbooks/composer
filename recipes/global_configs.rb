@@ -2,7 +2,7 @@
 # Cookbook:: composer
 # Recipe:: global_configs
 #
-# Copyright:: 2016-2021, David Joos
+# Copyright:: 2016-2022, David Joos
 #
 
 configs = node['composer']['global_configs']

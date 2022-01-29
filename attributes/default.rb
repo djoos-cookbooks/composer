@@ -2,7 +2,7 @@
 # Cookbook:: composer
 # Attributes:: default
 #
-# Copyright:: 2016-2021, David Joos
+# Copyright:: 2016-2022, David Joos
 #
 
 include_attribute 'php'
