@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version (>= 2.4.0) of the composer cookbook.
 
-## Unreleased
+## 2.8.0 (2021-12-15)
 
 - Chef 17 compatibility: enable `unified_mode` for custom resources
 - Remove deprecated foodcritic tool
@@ -10,6 +10,10 @@ This file is used to list changes made in each version (>= 2.4.0) of the compose
 - Convert legacy LWRP structure to custom resource syntax
 - Update Kitchen config to Inspec and current platforms
 - Update Travis CI to latest Chef Workstation
+
+## 2.7.0 (2020-04-29)
+
+- Point to new endpoint for stable download
 
 ## 2.6.1 (2017-06-22)
 
