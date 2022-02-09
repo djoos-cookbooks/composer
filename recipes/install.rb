@@ -34,7 +34,6 @@ else
   remote_file file do
     source node['composer']['url']
     mode node['composer']['mask']
-    action :create
-    not_if { ::File.exist?(file) }
+    action :create_if_missing
   end
 end
