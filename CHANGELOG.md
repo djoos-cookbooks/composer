@@ -5,6 +5,7 @@ This file is used to list changes made in each version (>= 2.4.0) of the compose
 ## Unreleased
 
 - Remove unneeded dependencies on `apt` / `windows` cookbooks for resources now in core Chef
+- Adds testing on Alma / Rocky Linux 8
 
 ### Breaking
 
