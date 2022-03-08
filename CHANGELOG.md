@@ -2,13 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.4.0) of the composer cookbook.
 
-## Unreleased
+## 3.0.0 (2022-03-08)
 
 - Remove unneeded dependencies on `apt` / `windows` cookbooks for resources now in core Chef
 - Adds testing on Alma / Rocky Linux 8
-
-### Breaking
-
 - Remove dependency on `php` cookbook
   - ⚠ This cookbook will no longer install PHP for you!
   - Use e.g. the `php` cookbook directly to install PHP before including these recipes
