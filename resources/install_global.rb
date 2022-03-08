@@ -2,7 +2,7 @@
 # Cookbook:: composer
 # Resource:: install_global
 #
-# Copyright:: 2012-2021, Escape Studios
+# Copyright:: 2012-2022, Escape Studios
 #
 
 unified_mode true

@@ -2,7 +2,7 @@
 # Cookbook:: composer
 # Recipe:: default
 #
-# Copyright:: 2016-2021, David Joos
+# Copyright:: 2016-2022, David Joos
 #
 
 include_recipe 'composer::install'

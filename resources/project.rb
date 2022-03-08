@@ -2,7 +2,7 @@
 # Cookbook:: composer
 # Resource:: project
 #
-# Copyright:: 2016-2021, David Joos
+# Copyright:: 2016-2022, David Joos
 #
 
 unified_mode true

@@ -2,10 +2,14 @@
 # Cookbook:: composer
 # Recipe:: install
 #
-# Copyright:: 2016-2021, David Joos
+# Copyright:: 2016-2022, David Joos
 #
 
-include_recipe node['composer']['php_recipe']
+log 'php check' do
+  level :fatal
+  message 'PHP is not installed. Please install PHP before including this recipe (e.g. with the `php` cookbook)'
+  not_if 'php --version'
+end
 
 if platform?('windows')
   windows_package 'Composer - PHP Dependency Manager' do
@@ -30,7 +34,6 @@ else
   remote_file file do
     source node['composer']['url']
     mode node['composer']['mask']
-    action :create
-    not_if { ::File.exist?(file) }
+    action :create_if_missing
   end
 end

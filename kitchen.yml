@@ -3,7 +3,7 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_zero
+  name: chef_infra
   product_name: chef
   chef_license: accept-no-persist
   enforce_idempotency: true
@@ -14,15 +14,19 @@ verifier:
   name: inspec
 
 platforms:
+  - name: almalinux-8
+  - name: centos_stream-8
   - name: centos-7
-  - name: centos-8
   - name: debian-10
+  - name: debian-11
+  - name: rockylinux-8
   - name: ubuntu-18.04
   - name: ubuntu-20.04
 
 suites:
   - name: default
     run_list:
+      - recipe[php::default]
       - recipe[composer::default]
     attributes:
       composer:

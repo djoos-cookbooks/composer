@@ -2,6 +2,17 @@
 
 This file is used to list changes made in each version (>= 2.4.0) of the composer cookbook.
 
+## Unreleased
+
+- Remove unneeded dependencies on `apt` / `windows` cookbooks for resources now in core Chef
+- Adds testing on Alma / Rocky Linux 8
+
+### Breaking
+
+- Remove dependency on `php` cookbook
+  - ⚠ This cookbook will no longer install PHP for you!
+  - Use e.g. the `php` cookbook directly to install PHP before including these recipes
+
 ## 2.8.0 (2021-12-15)
 
 - Chef 17 compatibility: enable `unified_mode` for custom resources
