@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.4.0) of the composer cookbook.
 
+## 3.0.1 (2022-03-25)
+
+- Fix for install_dir method callout, which should be composer_install_dir since 3.0.0 (NoMethodError: undefined method `install_dir` for Chef::Resource::Execute)
+
 ## 3.0.0 (2022-03-08)
 
 - Remove unneeded dependencies on `apt` / `windows` cookbooks for resources now in core Chef

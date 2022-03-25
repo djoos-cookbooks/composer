@@ -3,7 +3,7 @@ maintainer       'David Joos'
 maintainer_email 'development@davidjoos.com'
 license          'MIT'
 description      'Installs/Configures Composer'
-version          '3.0.0'
+version          '3.0.1'
 chef_version     '>= 15.3'
 
 %w(debian ubuntu redhat centos centos_stream fedora scientific amazon windows).each do |os|
