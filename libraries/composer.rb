@@ -6,7 +6,7 @@ module Composer
       end
 
       def composer_home_dir(node)
-        node['composer']['home_dir'] || install_dir(node)
+        node['composer']['home_dir'] || composer_install_dir(node)
       end
     end
   end
